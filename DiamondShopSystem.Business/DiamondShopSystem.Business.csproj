@@ -19,4 +19,8 @@
     <ProjectReference Include="..\DiamondShopSystem\DiamondShopSystem.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>
