@@ -1,6 +1,6 @@
 ﻿using DiamondShopSystem.Data.Models;
 
-namespace DiamondShopSystem.Business.Implement
+namespace DiamondShopSystem.Business.Business.Interfaces
 {
     public interface IProductBusiness
     {

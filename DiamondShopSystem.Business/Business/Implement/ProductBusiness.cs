@@ -1,7 +1,8 @@
-﻿using DiamondShopSystem.Data.Models;
+﻿using DiamondShopSystem.Business.Business.Interfaces;
+using DiamondShopSystem.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace DiamondShopSystem.Business.Implement
+namespace DiamondShopSystem.Business.Business.Implement
 {
 
     public class ProductBusiness : IProductBusiness
