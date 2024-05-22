@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Implement\**" />
     <Compile Remove="Models\**" />
+    <EmbeddedResource Remove="Implement\**" />
     <EmbeddedResource Remove="Models\**" />
+    <None Remove="Implement\**" />
     <None Remove="Models\**" />
   </ItemGroup>
 
@@ -22,11 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DiamondShopSystem.Common\DiamondShopSystem.Common.csproj" />
     <ProjectReference Include="..\DiamondShopSystem\DiamondShopSystem.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Implement\" />
   </ItemGroup>
 
 </Project>
