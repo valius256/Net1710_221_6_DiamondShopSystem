@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiamondShopSystem.Data", "DiamondShopSystem\DiamondShopSystem.Data.csproj", "{74E40D80-D41F-420E-8887-1D8AAF96AAA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiamondShopSystem.Data", "DiamondShopSystem\DiamondShopSystem.Data.csproj", "{74E40D80-D41F-420E-8887-1D8AAF96AAA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiamondShopSystem.Business", "DiamondShopSystem.Business\DiamondShopSystem.Business.csproj", "{60AE8AEC-0F38-4FEF-A86B-1015A344BECD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiamondShopSystem.Business", "DiamondShopSystem.Business\DiamondShopSystem.Business.csproj", "{60AE8AEC-0F38-4FEF-A86B-1015A344BECD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiamondShopSystem.RazorWebApp", "DiamondShopSystem.RazorWebApp\DiamondShopSystem.RazorWebApp.csproj", "{B6789267-5CED-472D-AFE0-CD6B8F3DF682}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiamondShopSystem.RazorWebApp", "DiamondShopSystem.RazorWebApp\DiamondShopSystem.RazorWebApp.csproj", "{B6789267-5CED-472D-AFE0-CD6B8F3DF682}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiamondShopSystem.Common", "Commom\DiamondShopSystem.Common.csproj", "{C5CC0159-18F5-4137-A2D9-4E135C532281}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{B6789267-5CED-472D-AFE0-CD6B8F3DF682}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6789267-5CED-472D-AFE0-CD6B8F3DF682}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6789267-5CED-472D-AFE0-CD6B8F3DF682}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5CC0159-18F5-4137-A2D9-4E135C532281}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5CC0159-18F5-4137-A2D9-4E135C532281}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5CC0159-18F5-4137-A2D9-4E135C532281}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5CC0159-18F5-4137-A2D9-4E135C532281}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
