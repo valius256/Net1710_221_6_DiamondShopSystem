@@ -7,11 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Implement\**" />
     <Compile Remove="Models\**" />
-    <EmbeddedResource Remove="Implement\**" />
     <EmbeddedResource Remove="Models\**" />
-    <None Remove="Implement\**" />
     <None Remove="Models\**" />
   </ItemGroup>
 
@@ -29,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="MappingProfile\" />
+    <Folder Include="Implement\" />
   </ItemGroup>
 
 </Project>
