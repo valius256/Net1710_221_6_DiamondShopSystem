@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DiamondShopSystem.Data.Models;
+﻿using DiamondShopSystem.Data.Models;
 
 namespace DiamondShopSystem.Business.Business.Interfaces
 {
     public interface IOrderBusiness
     {
 
-        Task<List<Order>> GetAllOrder();
-        Task<Order> getOrderByIdTask(int id);
+        Task<List<Order>?> GetAllOrderAsync();
+        Task<Order> GetOrderByIdAsync(int id);
+        Task<bool> CreateOrderAsync(Order order);
+        Task<bool> UpdateOrderAsync(Order order);
+        Task<bool> DeleteOrderAsync(int id);
     }
 }
