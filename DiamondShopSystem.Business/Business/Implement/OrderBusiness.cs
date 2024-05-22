@@ -10,12 +10,18 @@ namespace DiamondShopSystem.Business.Business.Imp
     {
         private readonly Net1710_221_6_DiamondShopSystemContext _context;
 
-        public async Task<List<Order>?> GetAllOrderAsync()
+        public OrderBusiness(Net1710_221_6_DiamondShopSystemContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<List<Order>> GetAllOrderAsync()
+
         {
             return await _context.Orders.ToListAsync();
         }
 
-        public async Task<Order> GetOrderByIdAsync(int id)
+        public async Task<Order?> GetOrderByIdAsync(int id)
         {
             return await _context.Orders.FirstOrDefaultAsync(x => x.OrderId == id);
         }
@@ -37,9 +43,13 @@ namespace DiamondShopSystem.Business.Business.Imp
         public async Task<bool> DeleteOrderAsync(int id)
         {
             var order = await _context.Orders.FirstOrDefaultAsync(x => x.OrderId == id);
-            _context.Orders.Remove(order);
-            await _context.SaveChangesAsync();
-            return true;
+            if (order != null)
+            {
+                _context.Orders.Remove(order);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            return false;
         }
     }
 }
