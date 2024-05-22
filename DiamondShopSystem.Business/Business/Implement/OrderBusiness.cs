@@ -1,55 +1,119 @@
 ﻿using DiamondShopSystem.Business.Business.Interfaces;
+using DiamondShopSystem.Common;
+using DiamondShopSystem.Data.DAO;
 using DiamondShopSystem.Data.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace DiamondShopSystem.Business.Business.Imp
 {
-
-
     public class OrderBusiness : IOrderBusiness
     {
-        private readonly Net1710_221_6_DiamondShopSystemContext _context;
+        private readonly OrderDAO _DAO;
 
-        public OrderBusiness(Net1710_221_6_DiamondShopSystemContext context)
+        public OrderBusiness()
         {
-            _context = context;
+            _DAO = new OrderDAO();
         }
 
-        public async Task<List<Order>> GetAllOrderAsync()
+        public async Task<IBusinessResult> GetAllOrderAsync()
 
         {
-            return await _context.Orders.ToListAsync();
-        }
-
-        public async Task<Order?> GetOrderByIdAsync(int id)
-        {
-            return await _context.Orders.FirstOrDefaultAsync(x => x.OrderId == id);
-        }
-
-        public async Task<bool> CreateOrderAsync(Order order)
-        {
-            _context.Orders.Add(order);
-            await _context.SaveChangesAsync();
-            return true;
-        }
-
-        public async Task<bool> UpdateOrderAsync(Order order)
-        {
-            _context.Orders.Update(order);
-            await _context.SaveChangesAsync();
-            return true;
-        }
-
-        public async Task<bool> DeleteOrderAsync(int id)
-        {
-            var order = await _context.Orders.FirstOrDefaultAsync(x => x.OrderId == id);
-            if (order != null)
+            try
             {
-                _context.Orders.Remove(order);
-                await _context.SaveChangesAsync();
-                return true;
+                var orders = await _DAO.GetAllAsync();
+                if (orders == null)
+                {
+                    return new BusinessResult(Const.WARNING_NO_DATA_CODE, Const.FAIL_READ_MSG);
+                }
+                else
+                {
+                    return new BusinessResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, orders);
+                }
             }
-            return false;
+            catch (Exception e)
+            {
+                return new BusinessResult(Const.ERROR_EXCEPTION, e.Message);
+            }
+        }
+
+        public async Task<IBusinessResult> GetOrderByIdAsync(int id)
+        {
+            try
+            {
+                var order = await _DAO.GetByIdAsync(id);
+                if (order == null)
+                {
+                    return new BusinessResult(Const.WARNING_NO_DATA_CODE, Const.FAIL_READ_MSG);
+                }
+                else
+                {
+                    return new BusinessResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, order);
+                }
+            }
+            catch (Exception e)
+            {
+                return new BusinessResult(Const.ERROR_EXCEPTION, e.Message);
+            }
+        }
+
+        public async Task<IBusinessResult> CreateOrderAsync(Order order)
+        {
+            try
+            {
+                var result = await _DAO.CreateAsync(order);
+                if (result < 0)
+                {
+                    return new BusinessResult(Const.FAIL_CREATE_CODE, Const.FAIL_CREATE_MSG);
+                }
+                else
+                {
+                    return new BusinessResult(Const.SUCCESS_CREATE_CODE, Const.SUCCESS_CREATE_MSG, result);
+                }
+            }
+            catch (Exception e)
+
+            {
+                return new BusinessResult(Const.ERROR_EXCEPTION, e.Message);
+            }
+        }
+
+        public async Task<IBusinessResult> UpdateOrderAsync(Order order)
+        {
+            try
+            {
+                var result = await _DAO.UpdateAsync(order);
+                if (result < 0)
+                {
+                    return new BusinessResult(Const.FAIL_UPDATE_CODE, Const.FAIL_UPDATE_MSG, result);
+                }
+                else
+                {
+                    return new BusinessResult(Const.SUCCESS_UPDATE_CODE, Const.SUCCESS_UPDATE_MSG, result);
+                }
+            }
+            catch (Exception e)
+            {
+                return new BusinessResult(Const.ERROR_EXCEPTION, e.Message);
+            }
+        }
+
+        public async Task<IBusinessResult> DeleteOrderAsync(Order order)
+        {
+            try
+            {
+                var result = await _DAO.RemoveAsync(order);
+                if (result)
+                {
+                    return new BusinessResult(Const.FAIL_DELETE_CODE, Const.FAIL_DELETE_MSG);
+                }
+                else
+                {
+                    return new BusinessResult(Const.SUCCESS_DELETE_CODE, Const.SUCCESS_DELETE_MSG, result);
+                }
+            }
+            catch (Exception e)
+            {
+                return new BusinessResult(Const.ERROR_EXCEPTION, e.Message);
+            }
         }
     }
 }
