@@ -16,7 +16,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Commom\DiamondShopSystem.Common.csproj" />
 		<ProjectReference Include="..\DiamondShopSystem\DiamondShopSystem.Data.csproj" />
 	</ItemGroup>
 
