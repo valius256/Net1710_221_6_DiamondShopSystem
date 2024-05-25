@@ -16,11 +16,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\DiamondShopSystem\DiamondShopSystem.Data.csproj" />
+		<Folder Include="Implement\" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Implement\" />
+		<ProjectReference Include="..\DiamondShopSystem.Common\DiamondShopSystem.Common.csproj" />
+		<ProjectReference Include="..\DiamondShopSystem.DataAccess\DiamondShopSystem.DataAccess.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiamondShopSystem.Data", "DiamondShopSystem\DiamondShopSystem.Data.csproj", "{74E40D80-D41F-420E-8887-1D8AAF96AAA7}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiamondShopSystem.Business", "DiamondShopSystem.Business\DiamondShopSystem.Business.csproj", "{60AE8AEC-0F38-4FEF-A86B-1015A344BECD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiamondShopSystem.RazorWebApp", "DiamondShopSystem.RazorWebApp\DiamondShopSystem.RazorWebApp.csproj", "{B6789267-5CED-472D-AFE0-CD6B8F3DF682}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiamondShopSystem.Common", "DiamondShopSystem.Common\DiamondShopSystem.Common.csproj", "{DCA6AD03-B453-4414-BFC7-4348CF9B610C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiamondShopSystem.DataAccess", "DiamondShopSystem.DataAccess\DiamondShopSystem.DataAccess.csproj", "{367773E3-8E31-4555-9ACD-BE9207D79516}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{74E40D80-D41F-420E-8887-1D8AAF96AAA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{74E40D80-D41F-420E-8887-1D8AAF96AAA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{74E40D80-D41F-420E-8887-1D8AAF96AAA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{74E40D80-D41F-420E-8887-1D8AAF96AAA7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{60AE8AEC-0F38-4FEF-A86B-1015A344BECD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{60AE8AEC-0F38-4FEF-A86B-1015A344BECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60AE8AEC-0F38-4FEF-A86B-1015A344BECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{DCA6AD03-B453-4414-BFC7-4348CF9B610C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCA6AD03-B453-4414-BFC7-4348CF9B610C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCA6AD03-B453-4414-BFC7-4348CF9B610C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{367773E3-8E31-4555-9ACD-BE9207D79516}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{367773E3-8E31-4555-9ACD-BE9207D79516}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{367773E3-8E31-4555-9ACD-BE9207D79516}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{367773E3-8E31-4555-9ACD-BE9207D79516}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

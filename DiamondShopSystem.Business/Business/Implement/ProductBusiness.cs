@@ -2,8 +2,6 @@
 using DiamondShopSystem.Common;
 using DiamondShopSystem.Data.DAO;
 using DiamondShopSystem.Data.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata;
 
 namespace DiamondShopSystem.Business.Business.Implement
 {
@@ -86,7 +84,7 @@ namespace DiamondShopSystem.Business.Business.Implement
             }
             else
             {
-                return new BusinessResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG,product);
+                return new BusinessResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, product);
             }
         }
 
