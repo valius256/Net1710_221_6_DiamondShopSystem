@@ -9,7 +9,7 @@ namespace DiamondShopSystem.DataAccess
 
         private ProductRepository _product;
         private CustomerRepository _customer;
-
+        private OrderRepository _order;
         public UnitOfWork()
         {
 
@@ -28,6 +28,14 @@ namespace DiamondShopSystem.DataAccess
             get
             {
                 return _customer ??= new Repository.CustomerRepository();
+            }
+        }
+
+        public OrderRepository OrderRepository
+        {
+            get
+            {
+                return _order ??= new Repository.OrderRepository();
             }
         }
     }
