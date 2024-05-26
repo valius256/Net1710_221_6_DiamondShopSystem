@@ -1,4 +1,5 @@
 ﻿using DiamondShopSystem.Business.Business.Interfaces;
+using DiamondShopSystem.Business.ViewModels;
 using DiamondShopSystem.Common;
 using DiamondShopSystem.Data.DAO;
 using DiamondShopSystem.Data.Models;
