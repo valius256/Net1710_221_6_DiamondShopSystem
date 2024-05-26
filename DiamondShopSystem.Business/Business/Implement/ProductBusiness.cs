@@ -1,25 +1,26 @@
 ﻿using DiamondShopSystem.Business.Business.Interfaces;
+using DiamondShopSystem.Business.ViewModels;
 using DiamondShopSystem.Common;
-using DiamondShopSystem.Data.DAO;
 using DiamondShopSystem.Data.Models;
+using DiamondShopSystem.DataAccess;
 
 namespace DiamondShopSystem.Business.Business.Implement
 {
 
     public class ProductBusiness : IProductBusiness
     {
-        private readonly ProductDAO _productDAO;
-
+        //private readonly ProductDAO _productDAO;
+        private readonly UnitOfWork _unitOfWork;
         public ProductBusiness()
         {
-            _productDAO = new ProductDAO();
+            _unitOfWork ??= new UnitOfWork();
         }
 
         public async Task<IBusinessResult> CreateProduct(Product product)
         {
             try
             {
-                int result = await _productDAO.CreateAsync(product);
+                int result = await _unitOfWork.ProductRepository.CreateAsync(product);
                 if (result > 0)
                 {
                     return new BusinessResult(Const.SUCCESS_CREATE_CODE, Const.SUCCESS_CREATE_MSG);
@@ -38,10 +39,10 @@ namespace DiamondShopSystem.Business.Business.Implement
         {
             try
             {
-                var currency = await _productDAO.GetByIdAsync(id);
+                var currency = await _unitOfWork.ProductRepository.GetByIdAsync(id);
                 if (currency != null)
                 {
-                    var result = await _productDAO.RemoveAsync(currency);
+                    var result = await _unitOfWork.ProductRepository.RemoveAsync(currency);
                     if (result)
                     {
                         return new BusinessResult(Const.SUCCESS_DELETE_CODE, Const.SUCCESS_DELETE_MSG);
@@ -64,7 +65,7 @@ namespace DiamondShopSystem.Business.Business.Implement
 
         public async Task<IBusinessResult> GetAllProducts()
         {
-            var products = await _productDAO.GetAllAsync();
+            var products = await _unitOfWork.ProductRepository.GetAllAsync();
             if (products is null)
             {
                 return new BusinessResult(Const.WARNING_NO_DATA_CODE, Const.WARNING_NO_DATA__MSG);
@@ -77,7 +78,7 @@ namespace DiamondShopSystem.Business.Business.Implement
 
         public async Task<IBusinessResult> GetByIdAsync(int id)
         {
-            var product = await _productDAO.GetByIdAsync(id);
+            var product = await _unitOfWork.ProductRepository.GetByIdAsync(id);
             if (product is null)
             {
                 return new BusinessResult(Const.WARNING_NO_DATA_CODE, Const.WARNING_NO_DATA__MSG);
@@ -92,7 +93,7 @@ namespace DiamondShopSystem.Business.Business.Implement
         {
             try
             {
-                int result = await _productDAO.UpdateAsync(product);
+                int result = await _unitOfWork.ProductRepository.UpdateAsync(product);
                 if (result > 0)
                 {
                     return new BusinessResult(Const.SUCCESS_UPDATE_CODE, Const.SUCCESS_UPDATE_MSG);

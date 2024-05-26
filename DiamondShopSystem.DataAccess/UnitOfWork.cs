@@ -18,7 +18,7 @@ namespace DiamondShopSystem.DataAccess
         {
             get
             {
-                return _product ?? new Repository.ProductRepository();
+                return _product ?? new ProductRepository();
             }
         }
     }
