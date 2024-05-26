@@ -1,4 +1,5 @@
-﻿using DiamondShopSystem.Data.Models;
+﻿using DiamondShopSystem.Business.ViewModels;
+using DiamondShopSystem.Data.Models;
 
 namespace DiamondShopSystem.Business.Business.Interfaces
 {

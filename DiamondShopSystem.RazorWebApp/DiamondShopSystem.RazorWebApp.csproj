@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DiamondShopSystem.Business\DiamondShopSystem.Business.csproj" />
     <Folder Include="Pages\currency\" />
   </ItemGroup>
 

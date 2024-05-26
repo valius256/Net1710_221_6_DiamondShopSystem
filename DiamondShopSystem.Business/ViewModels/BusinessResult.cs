@@ -1,4 +1,4 @@
-﻿namespace DiamondShopSystem.Data.Models
+﻿namespace DiamondShopSystem.Business.ViewModels
 {
     public interface IBusinessResult
     {

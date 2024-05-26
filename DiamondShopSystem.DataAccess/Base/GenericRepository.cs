@@ -1,4 +1,6 @@
-﻿using DiamondShopSystem.Data.Models;
+
+using DiamondShopSystem.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -104,32 +106,32 @@ namespace DiamondShopSystem.DataAccess.Base
             return true;
         }
 
-        public T GetById(int id)
+        public T? GetById(int id)
         {
             return _dbSet.Find(id);
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public async Task<T?> GetByIdAsync(int id)
         {
             return await _dbSet.FindAsync(id);
         }
 
-        public T GetById(string code)
+        public T? GetById(string code)
         {
             return _dbSet.Find(code);
         }
 
-        public async Task<T> GetByIdAsync(string code)
+        public async Task<T?> GetByIdAsync(string code)
         {
             return await _dbSet.FindAsync(code);
         }
 
-        public T GetById(Guid code)
+        public T? GetById(Guid code)
         {
             return _dbSet.Find(code);
         }
 
-        public async Task<T> GetByIdAsync(Guid code)
+        public async Task<T?> GetByIdAsync(Guid code)
         {
             return await _dbSet.FindAsync(code);
         }
