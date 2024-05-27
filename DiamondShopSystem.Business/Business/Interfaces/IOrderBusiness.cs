@@ -6,10 +6,10 @@ namespace DiamondShopSystem.Business.Business.Interfaces
     public interface IOrderBusiness
     {
 
-        Task<IBusinessResult> GetAllOrderAsync();
-        Task<IBusinessResult> GetOrderByIdAsync(int id);
-        Task<IBusinessResult> CreateOrderAsync(Order order);
-        Task<IBusinessResult> UpdateOrderAsync(Order order);
-        Task<IBusinessResult> DeleteOrderAsync(Order order);
+        Task<IBusinessResult> GetAllOrder();
+        Task<IBusinessResult> GetOrderById(int id);
+        Task<IBusinessResult> CreateOrder(Order order);
+        Task<IBusinessResult> UpdateOrder(Order order);
+        Task<IBusinessResult> DeleteOrder(int id);
     }
 }

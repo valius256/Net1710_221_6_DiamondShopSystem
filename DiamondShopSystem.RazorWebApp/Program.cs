@@ -1,10 +1,13 @@
-using DiamondShopSystem.Business.Business.Implement;
+using DiamondShopSystem.Business.Business.Imp;
+using DiamondShopSystem.Business.Business.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<ProductBusiness>();
+builder.Services.AddScoped<IOrderBusiness, OrderBusiness>();
+/*builder.Services.AddDbContext<Net1710_221_6_DiamondShopSystemContext>();*/
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
