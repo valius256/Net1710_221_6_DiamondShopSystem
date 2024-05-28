@@ -3,7 +3,7 @@ using DiamondShopSystem.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace DiamondShopSystem.RazorWebApp.Pages.Product
+namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
 {
     public class ProductModel : PageModel
     {
@@ -12,15 +12,20 @@ namespace DiamondShopSystem.RazorWebApp.Pages.Product
         {
             _productBusiness = productBusiness;
         }
-        public IEnumerable<Data.Models.Product> Products { get; set; } = new List<Data.Models.Product>();
+        public IEnumerable<Product> Products { get; set; } = new List<Product>();
 
-        public async void OnGet()
+        public async Task OnGetAsync()
         {
             var result = await _productBusiness.GetAllProducts();
             if (result != null)
             {
-                Products = result.Data != null ? (List<Data.Models.Product>)result.Data : new List<Data.Models.Product>();
+                Products = result.Data != null ? (List<Product>)result.Data : new List<Product>();
             }
+        }
+
+        public void OnPost()
+        {
+
         }
     }
 }
