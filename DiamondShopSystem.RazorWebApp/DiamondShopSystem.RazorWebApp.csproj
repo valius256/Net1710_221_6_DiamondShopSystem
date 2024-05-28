@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DiamondShopSystem.Business\DiamondShopSystem.Business.csproj" />
-    <Folder Include="Pages\currency\" />
+    <ProjectReference Include="..\DiamondShopSystem.DataAccess\DiamondShopSystem.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

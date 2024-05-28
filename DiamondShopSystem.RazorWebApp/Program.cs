@@ -1,3 +1,4 @@
+
 using DiamondShopSystem.Business.Business.Implement;
 using DiamondShopSystem.Business.Business.Interfaces;
 
@@ -9,6 +10,9 @@ builder.Services.AddScoped<IProductBusiness, ProductBusiness>();
 builder.Services.AddScoped<IMainDiamondBusiness, MainDiamondBusiness>();
 builder.Services.AddScoped<IDiamondSettingBusiness, DiamondSettingBusiness>();
 builder.Services.AddScoped<ISideStoneBusiness, SideStoneBusiness>();
+builder.Services.AddScoped<ProductBusiness>();
+builder.Services.AddScoped<IOrderBusiness, OrderBusiness>();
+/*builder.Services.AddDbContext<Net1710_221_6_DiamondShopSystemContext>();*/
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
