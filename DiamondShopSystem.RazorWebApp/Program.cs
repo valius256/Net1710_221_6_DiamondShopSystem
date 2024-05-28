@@ -1,6 +1,7 @@
 
 using DiamondShopSystem.Business.Business.Implement;
 using DiamondShopSystem.Business.Business.Interfaces;
+using DiamondShopSystem.Business.Business.Imp;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ builder.Services.AddScoped<IDiamondSettingBusiness, DiamondSettingBusiness>();
 builder.Services.AddScoped<ISideStoneBusiness, SideStoneBusiness>();
 builder.Services.AddScoped<ProductBusiness>();
 builder.Services.AddScoped<IOrderBusiness, OrderBusiness>();
+builder.Services.AddScoped<ICustomerBusiness, CustomerBusiness>();
 /*builder.Services.AddDbContext<Net1710_221_6_DiamondShopSystemContext>();*/
 var app = builder.Build();
 
