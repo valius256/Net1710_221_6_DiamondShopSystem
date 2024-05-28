@@ -1,4 +1,5 @@
 using DiamondShopSystem.Business.Business.Implement;
+using DiamondShopSystem.Business.Business.Interfaces;
 using DiamondShopSystem.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -7,8 +8,8 @@ namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
 {
     public class ProductModel : PageModel
     {
-        private readonly ProductBusiness _productBusiness;
-        public ProductModel(ProductBusiness productBusiness)
+        private readonly IProductBusiness _productBusiness;
+        public ProductModel(IProductBusiness productBusiness)
         {
             _productBusiness = productBusiness;
         }
@@ -17,10 +18,8 @@ namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
         public async Task OnGetAsync()
         {
             var result = await _productBusiness.GetAllProducts();
-            if (result != null)
-            {
-                Products = result.Data != null ? (List<Product>)result.Data : new List<Product>();
-            }
+            Products = result.Data != null ? (List<Product>)result.Data : new List<Product>();
+            
         }
 
         public void OnPost()

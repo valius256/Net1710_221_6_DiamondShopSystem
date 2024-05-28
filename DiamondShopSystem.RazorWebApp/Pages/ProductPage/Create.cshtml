@@ -39,16 +39,20 @@
     <div class="form-group">
         <label asp-for="Product.MainDiamondId"></label>
         <select asp-for="Product.MainDiamondId" class="form-select">
-            <option value="1">Blue</option>
-            <option value="2">White</option>
+            @foreach (var mainDiamond in Model.MainDiamonds)
+            {
+                <option value=@mainDiamond.MainDiamondId>@mainDiamond.MainDiamondType</option>
+            }
         </select>
         <span asp-validation-for="Product.MainDiamondId" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Product.SideStoneId"></label>
         <select asp-for="Product.SideStoneId" class="form-select">
-            <option value="1">ABC</option>
-            <option value="2">XYZ</option>
+            @foreach (var sideStone in Model.SideStones)
+            {
+                <option value=@sideStone.SideStoneId>@sideStone.Name</option>
+            }
         </select>
         <span asp-validation-for="Product.SideStoneId" class="text-danger"></span>
     </div>
@@ -60,8 +64,10 @@
     <div class="form-group">
         <label asp-for="Product.DiamondSettingId"></label>
         <select asp-for="Product.DiamondSettingId" class="form-select">
-            <option value="1">Sliver</option>
-            <option value="2">Platinum</option>
+            @foreach (var diamondSetting in Model.DiamondSettings)
+            {
+                <option value=@diamondSetting.DiamondSettingId>@diamondSetting.Name</option>
+            }
         </select>
         <span asp-validation-for="Product.DiamondSettingId" class="text-danger"></span>
     </div>
