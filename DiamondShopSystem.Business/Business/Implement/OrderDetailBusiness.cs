@@ -6,21 +6,21 @@ using DiamondShopSystem.DataAccess;
 
 namespace DiamondShopSystem.Business.Business.Imp
 {
-    public class OrderBusiness : IOrderBusiness
+    public class OrderDetailBusiness : IOrderDetailBusiness
     {
         //private readonly OrderDAO _DAO;
         private readonly UnitOfWork _unitOfWork;
 
-        public OrderBusiness()
+        public OrderDetailBusiness()
         {
             _unitOfWork ??= new UnitOfWork();
         }
 
-        public async Task<IBusinessResult> GetAllOrder()
+        public async Task<IBusinessResult> GetAllOrderDetail()
         {
             try
             {
-                var orders = await _unitOfWork.OrderRepository.GetAllAsync();
+                var orders = await _unitOfWork.OrderDetailRepository.GetAllAsync();
                 if (orders == null)
                 {
                     return new BusinessResult(Const.WARNING_NO_DATA_CODE, Const.FAIL_READ_MSG);
@@ -36,18 +36,18 @@ namespace DiamondShopSystem.Business.Business.Imp
             }
         }
 
-        public async Task<IBusinessResult> GetOrderById(int id)
+        public async Task<IBusinessResult> GetOrderDetailById(int id)
         {
             try
             {
-                var order = await _unitOfWork.OrderRepository.GetByIdAsync(id);
-                if (order == null)
+                var orderDetail = await _unitOfWork.OrderDetailRepository.GetByIdAsync(id);
+                if (orderDetail == null)
                 {
                     return new BusinessResult(Const.WARNING_NO_DATA_CODE, Const.FAIL_READ_MSG);
                 }
                 else
                 {
-                    return new BusinessResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, order);
+                    return new BusinessResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, orderDetail);
                 }
             }
             catch (Exception e)
@@ -56,11 +56,11 @@ namespace DiamondShopSystem.Business.Business.Imp
             }
         }
 
-        public async Task<IBusinessResult> CreateOrder(Order order)
+        public async Task<IBusinessResult> CreateOrderDetail(OrderDetail orderDetail)
         {
             try
             {
-                int result = await _unitOfWork.OrderRepository.CreateAsync(order);
+                int result = await _unitOfWork.OrderDetailRepository.CreateAsync(orderDetail);
                 if (result < 0)
                 {
                     return new BusinessResult(Const.FAIL_CREATE_CODE, Const.FAIL_CREATE_MSG);
@@ -77,11 +77,11 @@ namespace DiamondShopSystem.Business.Business.Imp
             }
         }
 
-        public async Task<IBusinessResult> UpdateOrder(Order order)
+        public async Task<IBusinessResult> UpdateOrderDetail(OrderDetail order)
         {
             try
             {
-                int result = await _unitOfWork.OrderRepository.UpdateAsync(order);
+                int result = await _unitOfWork.OrderDetailRepository.UpdateAsync(order);
                 if (result > 0)
                 {
                     return new BusinessResult(Const.SUCCESS_UPDATE_CODE, Const.SUCCESS_UPDATE_MSG);
@@ -97,14 +97,14 @@ namespace DiamondShopSystem.Business.Business.Imp
             }
         }
 
-        public async Task<IBusinessResult> DeleteOrder(int id)
+        public async Task<IBusinessResult> DeleteOrderDetail(int id)
         {
             try
             {
-                var order = await _unitOfWork.OrderRepository.GetByIdAsync(id);
+                var order = await _unitOfWork.OrderDetailRepository.GetByIdAsync(id);
                 if (order != null)
                 {
-                    var result = await _unitOfWork.OrderRepository.RemoveAsync(order);
+                    var result = await _unitOfWork.OrderDetailRepository.RemoveAsync(order);
                     if (result)
                     {
                         return new BusinessResult(Const.SUCCESS_DELETE_CODE, Const.SUCCESS_DELETE_MSG);

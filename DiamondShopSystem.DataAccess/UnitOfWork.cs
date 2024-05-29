@@ -9,6 +9,12 @@ namespace DiamondShopSystem.DataAccess
 
         private ProductRepository _product;
         private CustomerRepository _customer;
+        private MainDiamondRepository _mainDiamond;
+        private SideStoneRepository _sideStone;
+        private DiamondSettingRepository _diamondSetting;
+        private OrderRepository _order;
+        private OrderDetailRepository _orderDetail;
+
 
         public UnitOfWork()
         {
@@ -28,6 +34,42 @@ namespace DiamondShopSystem.DataAccess
             get
             {
                 return _customer ??= new Repository.CustomerRepository();
+            }
+        }
+        public MainDiamondRepository MainDiamondRepository
+        {
+            get
+            {
+                return _mainDiamond ??= new MainDiamondRepository();
+            }
+        }
+        public SideStoneRepository SideStoneRepository
+        {
+            get
+            {
+                return _sideStone ??= new SideStoneRepository();
+            }
+        }
+        public DiamondSettingRepository DiamondSettingRepository
+        {
+            get
+            {
+                return _diamondSetting ??= new DiamondSettingRepository();
+            }
+        }
+        public OrderRepository OrderRepository
+        {
+            get
+            {
+                return _order ??= new Repository.OrderRepository();
+            }
+        }
+
+        public OrderDetailRepository OrderDetailRepository
+        {
+            get
+            {
+                return _orderDetail ??= new OrderDetailRepository();
             }
         }
     }

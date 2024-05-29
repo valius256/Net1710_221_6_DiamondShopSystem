@@ -10,8 +10,14 @@
         <tr>
             <th>Name</th>
             <th>Price</th>
-            <th>Stock</th>
-            <th></th>
+            <th>Description</th>
+            <th>Warranty</th>
+            <th>Main Diamond</th>
+            <th>Side Stone</th>
+            <th>Side Stone Amount</th>
+            <th>Diamond Setting</th>
+            <th>Status</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -21,6 +27,12 @@
                 <td>@item.ProductName</td>
                 <td>@item.Price</td>
                 <td>@item.Description</td>
+                <td>@item.Warranty</td>
+                <td>@item.MainDiamond?.MainDiamondType</td>
+                <td>@item.SideStone?.Name</td>
+                <td>@item.SideStoneAmount</td>
+                <td>@item.DiamondSetting?.Name</td>
+                <td>@item.Status</td>
                 <td>
                     <a asp-page="Edit" asp-route-id="@item.ProductId">Edit</a> |
                     <a asp-page="Delete" asp-route-id="@item.ProductId">Delete</a>
