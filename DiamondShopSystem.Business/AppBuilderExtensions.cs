@@ -1,4 +1,4 @@
-﻿using DiamondShopSystem.Business.Business.Implement;
+using DiamondShopSystem.Business.Business.Implement;
 using DiamondShopSystem.Business.Business.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
