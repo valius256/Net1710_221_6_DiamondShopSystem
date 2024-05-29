@@ -1,0 +1,37 @@
+﻿@page
+@model DiamondShopSystem.RazorWebApp.Pages.OrderPage.CreateModel;
+@{
+}
+<h1>Create New Order</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Order.CustomerId"></label>
+        <span asp-validation-for="Order.CustomerId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Order.OrderDate"></label>
+        <input asp-for="Order.OrderDate" class="form-control" type="date" />
+        <span asp-validation-for="Order.OrderDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Order.OrderStatus"></label>
+        <input asp-for="Order.OrderStatus" class="form-control" />
+        <span asp-validation-for="Order.OrderStatus" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Order.DeliveryStatus"></label>
+        <input asp-for="Order.DeliveryStatus" class="form-control" />
+        <span asp-validation-for="Order.DeliveryStatus" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Order.TotalAmount"></label>
+        <input asp-for="Order.TotalAmount" class="form-control" type="number" step="0.01" />
+        <span asp-validation-for="Order.TotalAmount" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
