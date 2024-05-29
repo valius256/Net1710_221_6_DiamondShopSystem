@@ -13,6 +13,9 @@ namespace DiamondShopSystem.DataAccess
         private SideStoneRepository _sideStone;
         private DiamondSettingRepository _diamondSetting;
         private OrderRepository _order;
+        private OrderDetailRepository _orderDetail;
+
+
         public UnitOfWork()
         {
 
@@ -59,6 +62,14 @@ namespace DiamondShopSystem.DataAccess
             get
             {
                 return _order ??= new Repository.OrderRepository();
+            }
+        }
+
+        public OrderDetailRepository OrderDetailRepository
+        {
+            get
+            {
+                return _orderDetail ??= new OrderDetailRepository();
             }
         }
     }
