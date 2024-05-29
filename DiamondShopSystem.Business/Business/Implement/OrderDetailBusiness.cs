@@ -4,7 +4,7 @@ using DiamondShopSystem.Common;
 using DiamondShopSystem.Data.Models;
 using DiamondShopSystem.DataAccess;
 
-namespace DiamondShopSystem.Business.Business.Imp
+namespace DiamondShopSystem.Business.Business.Implement
 {
     public class OrderDetailBusiness : IOrderDetailBusiness
     {
