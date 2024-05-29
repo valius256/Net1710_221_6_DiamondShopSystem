@@ -1,20 +1,9 @@
-
-using DiamondShopSystem.Business.Business.Implement;
-using DiamondShopSystem.Business.Business.Interfaces;
-using DiamondShopSystem.Business.Business.Imp;
-
+using DiamondShopSystem.Business;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddScoped<IProductBusiness, ProductBusiness>();
-builder.Services.AddScoped<IMainDiamondBusiness, MainDiamondBusiness>();
-builder.Services.AddScoped<IDiamondSettingBusiness, DiamondSettingBusiness>();
-builder.Services.AddScoped<ISideStoneBusiness, SideStoneBusiness>();
-builder.Services.AddScoped<ProductBusiness>();
-builder.Services.AddScoped<IOrderBusiness, OrderBusiness>();
-builder.Services.AddScoped<ICustomerBusiness, CustomerBusiness>();
-/*builder.Services.AddDbContext<Net1710_221_6_DiamondShopSystemContext>();*/
+builder.Services.DIServices();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
