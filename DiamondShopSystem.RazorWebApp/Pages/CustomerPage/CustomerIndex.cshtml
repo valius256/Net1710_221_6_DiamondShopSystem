@@ -1,0 +1,41 @@
+﻿@page
+@model DiamondShopSystem.RazorWebApp.Pages.CustomerPage.CustomerModel
+@{
+}
+
+<h1>Customer List</h1>
+<p>
+    <a asp-page="Create">Create New Customer</a>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Customer ID</th>
+        <th>Email</th>
+        <th>Gender</th>
+        <th>Birthday</th>
+        <th>Address</th>
+        <th>Created At</th>
+        <th>Updated At</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Customers)
+        {
+            <tr>
+                <td>@item.CustomerId</td>
+                <td>@item.Email</td>
+                <td>@item.Gender</td>
+                <td>@item.Birthday</td>
+                <td>@item.Address</td>
+                <td>@item.CreateAt</td>
+                <td>@item.UpdateAt</td>
+                <td>
+                    <a asp-page="Edit" asp-route-id="@item.CustomerId">Edit</a> |
+                    <a asp-page="Delete" asp-route-id="@item.CustomerId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
