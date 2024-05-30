@@ -7,7 +7,7 @@ namespace DiamondShopSystem.Business.Business.Interfaces
     {
 
         Task<IBusinessResult> GetAllCustomerAsync();
-        Task<IBusinessResult> GetCustomerByIdAsync(int id);
+        Task<IBusinessResult> GetCustomerByIdAsync(int customerId);
         Task<IBusinessResult> CreateCustomerAsync(Customer customer);
         Task<IBusinessResult> UpdateCustomerAsync(Customer customer);
         Task<IBusinessResult> DeleteCustomerAsync(Customer customer);
