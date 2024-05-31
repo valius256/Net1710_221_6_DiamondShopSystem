@@ -1,0 +1,37 @@
+﻿@page
+@model DiamondShopSystem.RazorWebApp.Pages.CustomerPage.CreateModel
+@{
+}
+<h1>Create New Customer</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Customer.Email"></label>
+        <input asp-for="Customer.Email" class="form-control" />
+        <span asp-validation-for="Customer.Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Customer.Gender"></label>
+        <select asp-for="Customer.Gender" class="form-select">
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+            <option value="3">Other</option>
+        </select>
+        <span asp-validation-for="Customer.Gender" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Customer.Birthday"></label>
+        <input asp-for="Customer.Birthday" class="form-control" />
+        <span asp-validation-for="Customer.Birthday" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Customer.Address"></label>
+        <input asp-for="Customer.Address" class="form-control" />
+        <span asp-validation-for="Customer.Address" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
