@@ -5,9 +5,5 @@ namespace DiamondShopSystem.DataAccess.Repository
 {
     public class ProductRepository : GenericRepository<Product>
     {
-        public ProductRepository() 
-        { 
-        
-        }
     }
 }
