@@ -1,0 +1,93 @@
+﻿@page
+@model DiamondShopSystem.RazorWebApp.Pages.ProductPage.EditModel
+@{
+}
+<h1>Edit Product</h1>
+
+<a asp-page="Index" class="text-decoration-none fw-bold">Back</a>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Product.ProductName"></label>
+        <input asp-for="Product.ProductName" class="form-control" />
+        <span asp-validation-for="Product.ProductName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Product.Price"></label>
+        <input asp-for="Product.Price" class="form-control" type="number"/>
+        <span asp-validation-for="Product.Price" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Product.Description"></label>
+        <textarea asp-for="Product.Description" class="form-control"></textarea>
+        <span asp-validation-for="Product.Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Product.Warranty"></label>
+        <input asp-for="Product.Warranty" class="form-control" />
+        <span asp-validation-for="Product.Warranty" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Product.StartDate">Warranty Start Date</label>
+        <input asp-for="Product.StartDate" class="form-control" />
+        <span asp-validation-for="Product.StartDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Product.EndDate">Warranty End Date</label>
+        <input asp-for="Product.EndDate" class="form-control" />
+        <span asp-validation-for="Product.EndDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Product.MainDiamondId"></label>
+        <select asp-for="Product.MainDiamondId" class="form-select">
+            @foreach (var mainDiamond in Model.MainDiamonds)
+            {
+                <option value=@mainDiamond.MainDiamondId>@mainDiamond.MainDiamondType</option>
+            }
+        </select>
+        <span asp-validation-for="Product.MainDiamondId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Product.SideStoneId"></label>
+        <select asp-for="Product.SideStoneId" class="form-select">
+            @foreach (var sideStone in Model.SideStones)
+            {
+                <option value=@sideStone.SideStoneId>@sideStone.Name</option>
+            }
+        </select>
+        <span asp-validation-for="Product.SideStoneId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Product.SideStoneAmount"></label>
+        <input asp-for="Product.SideStoneAmount" class="form-control" type="number" />
+        <span asp-validation-for="Product.SideStoneAmount" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Product.DiamondSettingId"></label>
+        <select asp-for="Product.DiamondSettingId" class="form-select">
+            @foreach (var diamondSetting in Model.DiamondSettings)
+            {
+                <option value=@diamondSetting.DiamondSettingId>@diamondSetting.Name</option>
+            }
+        </select>
+        <span asp-validation-for="Product.DiamondSettingId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Product.Terms"></label>
+        <input asp-for="Product.Terms" class="form-control" />
+        <span asp-validation-for="Product.Terms" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Product.Status"></label>
+        <select asp-for="Product.Status" class="form-select">
+            <option value="1">Available</option>
+            <option value="2">Unavailable</option>
+        </select>
+        <span asp-validation-for="Product.Status" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
