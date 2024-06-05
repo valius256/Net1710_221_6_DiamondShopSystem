@@ -65,7 +65,7 @@ namespace DiamondShopSystem.Business.Business.Implement
 
         public async Task<IBusinessResult> GetAllProducts()
         {
-            var products = await _unitOfWork.ProductRepository.GetAllAsync();
+            var products = await _unitOfWork.ProductRepository.GetProducts();
             if (products is null)
             {
                 return new BusinessResult(Const.WARNING_NO_DATA_CODE, Const.WARNING_NO_DATA__MSG);
