@@ -1,4 +1,5 @@
 ﻿using DiamondShopSystem.Wpf.UI;
+using Net1710_221_6_DiamondShopSystem.WpfApp.UI;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,6 +27,13 @@ namespace DiamondShopSystem.Wpf
             var p = new wProduct();
             p.Owner = this;
             p.Show();
+        }
+
+            private async void Open_wOrder_Click(object sender, RoutedEventArgs e)
+        {
+            var order = new wOrder();
+            order.Owner = this;
+            order.Show();
         }
     }
 }

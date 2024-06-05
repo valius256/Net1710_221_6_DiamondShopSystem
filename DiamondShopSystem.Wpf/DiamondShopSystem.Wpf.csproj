@@ -30,4 +30,10 @@
     <ProjectReference Include="..\DiamondShopSystem.Business\DiamondShopSystem.Business.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="UI\Order\wOrder.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiamondShopSystem.Common", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiamondShopSystem.DataAccess", "DiamondShopSystem.DataAccess\DiamondShopSystem.DataAccess.csproj", "{367773E3-8E31-4555-9ACD-BE9207D79516}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net1710_221_6_DiamondShopSystem.WpfApp", "Net1710_221_6_DiamondShopSystem.WpfApp\Net1710_221_6_DiamondShopSystem.WpfApp.csproj", "{5CF58D2A-3DDA-46C2-8ED5-8894894384C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiamondShopSystem.Wpf", "DiamondShopSystem.Wpf\DiamondShopSystem.Wpf.csproj", "{563077C8-12D4-4BCF-8D92-F8315AD77139}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{367773E3-8E31-4555-9ACD-BE9207D79516}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{367773E3-8E31-4555-9ACD-BE9207D79516}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{367773E3-8E31-4555-9ACD-BE9207D79516}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5CF58D2A-3DDA-46C2-8ED5-8894894384C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5CF58D2A-3DDA-46C2-8ED5-8894894384C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5CF58D2A-3DDA-46C2-8ED5-8894894384C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5CF58D2A-3DDA-46C2-8ED5-8894894384C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{563077C8-12D4-4BCF-8D92-F8315AD77139}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{563077C8-12D4-4BCF-8D92-F8315AD77139}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{563077C8-12D4-4BCF-8D92-F8315AD77139}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{563077C8-12D4-4BCF-8D92-F8315AD77139}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
