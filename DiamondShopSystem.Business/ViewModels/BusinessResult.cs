@@ -5,6 +5,8 @@
         int Status { get; set; }
         string? Message { get; set; }
         object? Data { get; set; }
+        bool Success { get; }
+        string? ErrorMessage { get; }
     }
 
     public class BusinessResult : IBusinessResult
@@ -12,6 +14,10 @@
         public int Status { get; set; }
         public string? Message { get; set; }
         public object? Data { get; set; }
+
+        // New properties
+        public bool Success => Status == 1; // Assuming Status 1 indicates success
+        public string? ErrorMessage => Success ? null : Message;
 
         public BusinessResult()
         {

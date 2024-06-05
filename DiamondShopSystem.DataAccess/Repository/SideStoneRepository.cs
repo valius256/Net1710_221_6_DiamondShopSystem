@@ -1,6 +1,4 @@
-﻿
-
-using DiamondShopSystem.Data.Models;
+﻿using DiamondShopSystem.Data.Models;
 using DiamondShopSystem.DataAccess.Base;
 
 namespace DiamondShopSystem.DataAccess.Repository
