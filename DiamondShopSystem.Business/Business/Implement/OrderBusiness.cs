@@ -36,6 +36,26 @@ namespace DiamondShopSystem.Business.Business.Implement
             }
         }
 
+        public async Task<IBusinessResult> Save(Order order)
+        {
+            try
+            {
+               var result =  await _unitOfWork.OrderRepository.SaveAsync(order);
+                if(result > 0   )
+                {
+                    return new BusinessResult(Const.SUCCESS_CREATE_CODE, Const.SUCCESS_CREATE_MSG);
+                }
+                else
+                {
+                    return new BusinessResult(Const.FAIL_CREATE_CODE, Const.FAIL_CREATE_MSG);
+                }
+            }
+            catch (Exception e)
+            {
+                return new BusinessResult(-4, e.Message.ToString());
+            }
+        }
+
         public async Task<IBusinessResult> GetOrderById(int id)
         {
             try

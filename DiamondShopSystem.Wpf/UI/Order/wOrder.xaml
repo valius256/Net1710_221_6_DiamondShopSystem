@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Net1710_221_6_DiamondShopSystem.WpfApp.UI"
         mc:Ignorable="d"
-        Title="wOrder" Height="450" Width="800">
+        Title="wOrder" Height="450" Width="1366">
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Width="1261">
             <GroupBox Header="Order Form" Margin="10">
@@ -38,7 +38,7 @@
                 <Button x:Name="ButtonCancel" Content="Cancel" Height="30" Width="80" Click="ButtonCancel_Click"/>
             </StackPanel>
             <StackPanel Height="210">
-                <DataGrid x:Name="grdOrder" AutoGenerateColumns="False" ItemsSource="{Binding Orders}" CanUserAddRows="False" Height="200" Margin="10" MouseDoubleClick="grdOrder_MouseDouble_Click" SelectionMode="Single" SelectionUnit="FullRow" SelectionChanged="grdOrder_SelectionChanged">
+                <DataGrid x:Name="grdOrder" AutoGenerateColumns="False" ItemsSource="{Binding Order}" CanUserAddRows="False" Height="200" Margin="10" MouseDoubleClick="grdOrder_MouseDouble_Click" SelectionMode="Single" SelectionUnit="FullRow" SelectionChanged="grdOrder_SelectionChanged">
                     <DataGrid.Columns>
                         <!--<DataGridTextColumn Header="Id" Binding="{Binding Path=OrderId}" Visibility="Hidden"/>-->
                         <DataGridTextColumn Header="OrderId" Binding="{Binding Path=OrderId}" Visibility="Visible"/>

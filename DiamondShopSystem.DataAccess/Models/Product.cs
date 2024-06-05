@@ -41,5 +41,7 @@ public partial class Product
 
     public virtual MainDiamond MainDiamond { get; set; }
 
+    public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
+
     public virtual SideStone SideStone { get; set; }
 }
