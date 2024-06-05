@@ -1,5 +1,6 @@
 ﻿using DiamondShopSystem.Data.Models;
 using DiamondShopSystem.DataAccess.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace DiamondShopSystem.DataAccess
 {
@@ -15,10 +16,9 @@ namespace DiamondShopSystem.DataAccess
         private OrderRepository _order;
         private OrderDetailRepository _orderDetail;
 
-
         public UnitOfWork()
         {
-
+            _unitOfWorkContext ??= new Net1710_221_6_DiamondShopSystemContext(new DbContextOptions<Net1710_221_6_DiamondShopSystemContext>());
         }
 
 
