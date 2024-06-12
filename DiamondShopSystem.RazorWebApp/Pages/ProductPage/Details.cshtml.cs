@@ -12,13 +12,13 @@ using DiamondShopSystem.Business.Business.Interfaces;
 
 namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
 {
-    public class IndexModel : PageModel
+    public class DetailsModel : PageModel
     {
         private readonly IProductBusiness _productBusiness;
         private readonly IMainDiamondBusiness _mainDiamondBusiness;
         private readonly IDiamondSettingBusiness _diamondSettingBusiness;
         private readonly ISideStoneBusiness _sideStoneBusiness;
-        public IndexModel(IProductBusiness productBusiness, IMainDiamondBusiness mainDiamondBusiness, IDiamondSettingBusiness diamondSettingBusiness, ISideStoneBusiness sideStoneBusiness)
+        public DetailsModel(IProductBusiness productBusiness, IMainDiamondBusiness mainDiamondBusiness, IDiamondSettingBusiness diamondSettingBusiness, ISideStoneBusiness sideStoneBusiness)
         {
             _productBusiness = productBusiness;
             _mainDiamondBusiness = mainDiamondBusiness;
@@ -26,11 +26,25 @@ namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
             _sideStoneBusiness = sideStoneBusiness;
         }
 
-        public IList<Product> Product { get;set; } = default!;
+        public Product Product { get; set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
-            Product = (await _productBusiness.GetAllProducts()).Data as List<Product> ?? new List<Product>();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var product = (await _productBusiness.GetByIdAsync((int) id)).Data as Product;
+            if (product == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                Product = product;
+            }
+            return Page();
         }
     }
 }

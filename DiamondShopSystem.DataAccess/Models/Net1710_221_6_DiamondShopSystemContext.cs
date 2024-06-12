@@ -139,8 +139,7 @@ public partial class Net1710_221_6_DiamondShopSystemContext : DbContext
         modelBuilder.Entity<Product>(entity =>
         {
             entity.Property(e => e.ProductId)
-                .ValueGeneratedNever()
-                .HasColumnName("ProductID");
+                .HasColumnName("ProductID").ValueGeneratedOnAdd();
             entity.Property(e => e.CreateAt).HasColumnType("datetime");
             entity.Property(e => e.Description).HasMaxLength(2000);
             entity.Property(e => e.DiamondSettingId).HasColumnName("DiamondSettingID");

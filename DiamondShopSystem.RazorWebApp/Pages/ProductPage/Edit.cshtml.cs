@@ -1,9 +1,16 @@
-using DiamondShopSystem.Business.Business.Interfaces;
-using DiamondShopSystem.Data.Models;
-using DiamondShopSystem.DataAccess;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using DiamondShopSystem.Data.Models;
+using DiamondShopSystem.RazorWebApp.DataAccess;
+using DiamondShopSystem.Business.Business.Implement;
+using Humanizer;
+using DiamondShopSystem.Business.Business.Interfaces;
 
 namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
 {
@@ -11,47 +18,74 @@ namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
     {
         private readonly IProductBusiness _productBusiness;
         private readonly IMainDiamondBusiness _mainDiamondBusiness;
-        private readonly ISideStoneBusiness _sideStoneBusiness;
         private readonly IDiamondSettingBusiness _diamondSettingBusiness;
-        private readonly UnitOfWork unitOfWork;
-        public EditModel(IProductBusiness productBusiness, IMainDiamondBusiness mainDiamondBusiness,
-            ISideStoneBusiness sideStoneBusiness, IDiamondSettingBusiness diamondSettingBusiness)
+        private readonly ISideStoneBusiness _sideStoneBusiness;
+        public EditModel(IProductBusiness productBusiness, IMainDiamondBusiness mainDiamondBusiness, IDiamondSettingBusiness diamondSettingBusiness, ISideStoneBusiness sideStoneBusiness)
         {
             _productBusiness = productBusiness;
             _mainDiamondBusiness = mainDiamondBusiness;
-            _sideStoneBusiness = sideStoneBusiness;
             _diamondSettingBusiness = diamondSettingBusiness;
+            _sideStoneBusiness = sideStoneBusiness;
         }
 
         [BindProperty]
-        public Product Product { get; set; }
-        public List<MainDiamond> MainDiamonds { get; set; }
-        public List<DiamondSetting> DiamondSettings { get; set; }
-        public List<SideStone> SideStones { get; set; }
+        public Product Product { get; set; } = default!;
 
-        public async Task OnGetAsync(int id)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
-            var mainDiamonds = await _mainDiamondBusiness.GetAllMainDiamonds();
-            MainDiamonds = mainDiamonds.Data != null ? (List<MainDiamond>)mainDiamonds.Data : new List<MainDiamond>();
-            var sideStones = await _sideStoneBusiness.GetAllSideStones();
-            SideStones = sideStones.Data != null ? (List<SideStone>)sideStones.Data : new List<SideStone>();
-            var diamondSettings = await _diamondSettingBusiness.GetAllDiamondSettings();
-            DiamondSettings = diamondSettings.Data != null ? (List<DiamondSetting>)diamondSettings.Data : new List<DiamondSetting>();
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-            var product = await _productBusiness.GetByIdAsync(id);
-            Product = product.Data != null ? (Product)product.Data : new Product();
+            var product = await _productBusiness.GetByIdAsync((int) id);
+            if (product.Data == null)
+            {
+                return NotFound();
+            } 
+            Product = product.Data as Product ?? new Product();
+            var diamondSettings = (await _diamondSettingBusiness.GetAllDiamondSettings()).Data as List<DiamondSetting>;
+            var mainDiamonds = (await _mainDiamondBusiness.GetAllMainDiamonds()).Data as List<MainDiamond>;
+            var sideStones = (await _sideStoneBusiness.GetAllSideStones()).Data as List<SideStone>;
+
+            ViewData["DiamondSettingId"] = new SelectList(diamondSettings, "DiamondSettingId", "DiamondSettingId");
+            ViewData["MainDiamondId"] = new SelectList(mainDiamonds, "MainDiamondId", "MainDiamondId");
+            ViewData["SideStoneId"] = new SelectList(sideStones, "SideStoneId", "SideStoneId");
+            return Page();
         }
+
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid || Product == null)
+            if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            var result = await _productBusiness.UpdateProduct(Product);
+            try
+            {
+                await _productBusiness.UpdateProduct(Product);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!await ProductExists(Product.ProductId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-            Debug.WriteLine(result);
             return RedirectToPage("./Index");
+        }
+
+        private async Task<bool> ProductExists(int id)
+        {
+            var product = await _productBusiness.GetByIdAsync(id);
+            return product.Data != null;
         }
     }
 }
