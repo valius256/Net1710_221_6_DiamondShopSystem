@@ -1,4 +1,4 @@
-﻿namespace DiamondShopSystem.Data.Models
+﻿namespace DiamondShopSystem.DataAccess.Models
 {
     public interface ITopUpResult
     {

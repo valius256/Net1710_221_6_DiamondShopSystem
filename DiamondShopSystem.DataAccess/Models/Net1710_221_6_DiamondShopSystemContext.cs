@@ -2,6 +2,7 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using DiamondShopSystem.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -27,7 +28,9 @@ public partial class Net1710_221_6_DiamondShopSystemContext : DbContext
     public virtual DbSet<Product> Products { get; set; }
 
     public virtual DbSet<SideStone> SideStones { get; set; }
-     public static string GetConnectionString(string connectionStringName)
+
+
+    public static string GetConnectionString(string connectionStringName)
     {
         var config = new ConfigurationBuilder()
             .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
@@ -35,10 +38,13 @@ public partial class Net1710_221_6_DiamondShopSystemContext : DbContext
             .Build();
 
         string connectionString = config.GetConnectionString(connectionStringName);
+        Console.Write("appsettings: ", connectionString);
         return connectionString;
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer(GetConnectionString("DefaultConnection"));
+
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Customer>(entity =>

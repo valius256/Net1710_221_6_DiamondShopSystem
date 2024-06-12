@@ -1,7 +1,5 @@
-using DiamondShopSystem.Business.Business.Implement;
 using DiamondShopSystem.Business.Business.Interfaces;
 using DiamondShopSystem.Data.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
@@ -19,7 +17,7 @@ namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
         {
             var result = await _productBusiness.GetAllProducts();
             Products = result.Data != null ? (List<Product>)result.Data : new List<Product>();
-            
+
         }
 
         public void OnPost()
