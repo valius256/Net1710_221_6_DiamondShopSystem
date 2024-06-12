@@ -1,7 +1,7 @@
 using DiamondShopSystem.Business.Business.Interfaces;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace DiamondShopSystem.RazorWebApp.Pages
+namespace DiamondShopSystem.RazorWebApp.Pages.OrderPage
 {
     public class OrderModel : PageModel
     {

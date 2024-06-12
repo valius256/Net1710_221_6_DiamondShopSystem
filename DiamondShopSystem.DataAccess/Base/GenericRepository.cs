@@ -45,7 +45,7 @@ namespace DiamondShopSystem.DataAccess.Base
             return _context.SaveChanges();
         }
 
-        public async Task<int> SaveAsync()
+        public async Task<int> SaveAsync(Order order)
         {
             return await _context.SaveChangesAsync();
         }
@@ -57,7 +57,7 @@ namespace DiamondShopSystem.DataAccess.Base
         {
             return _dbSet.ToList();
         }
-        public async Task<List<T>> GetAllAsync()
+        public async Task<List<T>?> GetAllAsync()
         {
             return await _dbSet.ToListAsync();
         }

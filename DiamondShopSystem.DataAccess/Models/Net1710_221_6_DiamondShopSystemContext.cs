@@ -2,6 +2,7 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using DiamondShopSystem.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -28,6 +29,7 @@ public partial class Net1710_221_6_DiamondShopSystemContext : DbContext
 
     public virtual DbSet<SideStone> SideStones { get; set; }
 
+
     public static string GetConnectionString(string connectionStringName)
     {
         var config = new ConfigurationBuilder()
@@ -36,6 +38,7 @@ public partial class Net1710_221_6_DiamondShopSystemContext : DbContext
             .Build();
 
         string connectionString = config.GetConnectionString(connectionStringName);
+        Console.Write("appsettings: ", connectionString);
         return connectionString;
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -100,13 +103,9 @@ public partial class Net1710_221_6_DiamondShopSystemContext : DbContext
                 .HasColumnName("OrderID");
             entity.Property(e => e.CreateAt).HasColumnType("datetime");
             entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
-            entity.Property(e => e.DeliveryStatus)
-                .IsRequired()
-                .HasMaxLength(100);
+            entity.Property(e => e.DeliveryStatus).HasMaxLength(100);
             entity.Property(e => e.OrderDate).HasColumnType("datetime");
-            entity.Property(e => e.OrderStatus)
-                .IsRequired()
-                .HasMaxLength(100);
+            entity.Property(e => e.OrderStatus).HasMaxLength(100);
             entity.Property(e => e.TotalAmount).HasColumnType("decimal(19, 4)");
             entity.Property(e => e.UpdateAt).HasColumnType("datetime");
 
@@ -126,10 +125,15 @@ public partial class Net1710_221_6_DiamondShopSystemContext : DbContext
             entity.Property(e => e.OrderId).HasColumnName("OrderID");
             entity.Property(e => e.ProductId).HasColumnName("ProductID");
 
-            entity.HasOne(d => d.OrderDetailNavigation).WithOne(p => p.OrderDetail)
-                .HasForeignKey<OrderDetail>(d => d.OrderDetailId)
+            entity.HasOne(d => d.Order).WithMany(p => p.OrderDetails)
+                .HasForeignKey(d => d.OrderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_OrderDetails_Orders");
+
+            entity.HasOne(d => d.Product).WithMany(p => p.OrderDetails)
+                .HasForeignKey(d => d.ProductId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_OrderDetails_Products");
         });
 
         modelBuilder.Entity<Product>(entity =>

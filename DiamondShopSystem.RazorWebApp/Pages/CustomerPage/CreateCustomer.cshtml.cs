@@ -2,8 +2,6 @@ using DiamondShopSystem.Business.Business.Interfaces;
 using DiamondShopSystem.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
-using System.Threading.Tasks;
 
 namespace DiamondShopSystem.RazorWebApp.Pages.CustomerPage
 {
