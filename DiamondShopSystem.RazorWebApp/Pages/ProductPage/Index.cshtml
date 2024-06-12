@@ -1,43 +1,114 @@
 ﻿@page
-@model ProductModel
+@model DiamondShopSystem.RazorWebApp.Pages.ProductPage.IndexModel
 
-<h1>Product List</h1>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
 <p>
-    <a asp-page="Create">Create New Product</a>
+    <a asp-page="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Description</th>
-            <th>Warranty</th>
-            <th>Main Diamond</th>
-            <th>Side Stone</th>
-            <th>Side Stone Amount</th>
-            <th>Diamond Setting</th>
-            <th>Status</th>
-            <th>Action</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].CreateAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].UpdateAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].Warranty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].Terms)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].SideStoneAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].DiamondSetting)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].MainDiamond)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].SideStone)
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Products)
-        {
-            <tr>
-                <td>@item.ProductName</td>
-                <td>@item.Price</td>
-                <td>@item.Description</td>
-                <td>@item.Warranty</td>
-                <td>@item.MainDiamond?.MainDiamondType</td>
-                <td>@item.SideStone?.Name</td>
-                <td>@item.SideStoneAmount</td>
-                <td>@item.DiamondSetting?.Name</td>
-                <td>@item.Status</td>
-                <td>
-                    <a asp-page="Edit" asp-route-id="@item.ProductId">Edit</a> |
-                    <a asp-page="Delete" asp-route-id="@item.ProductId">Delete</a>
-                </td>
-            </tr>
-        }
+@foreach (var item in Model.Product) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdateAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Warranty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Terms)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SideStoneAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiamondSetting.DiamondSettingId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MainDiamond.MainDiamondId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SideStone.SideStoneId)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ProductId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ProductId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ProductId">Delete</a>
+            </td>
+        </tr>
+}
     </tbody>
 </table>
