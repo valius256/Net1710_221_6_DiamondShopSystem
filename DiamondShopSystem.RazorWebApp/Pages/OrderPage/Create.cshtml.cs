@@ -1,40 +1,44 @@
-using DiamondShopSystem.Business.Business.Interfaces;
+﻿using DiamondShopSystem.Business.Business.Interfaces;
 using DiamondShopSystem.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc.Rendering;
+
 
 namespace DiamondShopSystem.RazorWebApp.Pages.OrderPage
 {
     public class CreateModel : PageModel
-    {
-        private readonly IOrderBusiness _orderBusiness;
-        private readonly IOrderDetailBusiness _orderDetailBusiness;
+    { 
+          private readonly IOrderBusiness _orderBusiness;
+          private readonly ICustomerBusiness _customerBusiness;
 
-        public CreateModel(IOrderBusiness orderBusiness, IOrderDetailBusiness orderDetailBusiness)
+        public CreateModel(IOrderBusiness orderBusiness, ICustomerBusiness customerBusiness)
         {
             _orderBusiness = orderBusiness;
-            _orderDetailBusiness = orderDetailBusiness;
+            _customerBusiness = customerBusiness;
+        }
+
+
+
+        public async Task<IActionResult> OnGetAsync()
+        {
+            ViewData["CustomerId"] = new SelectList((await _customerBusiness.GetAllCustomerAsync()).Data as List<Customer>, "CustomerId", "CustomerId");
+            return Page();
         }
 
         [BindProperty]
-        public Data.Models.Order Order { get; set; }
-        public List<OrderDetail> OrderDetails { get; set; }
+        public Order Order { get; set; } = default!;
 
-        public async Task OnGetAsync()
-        {
-            var orderDetail = await _orderDetailBusiness.GetAllOrderDetail();
-            OrderDetails = orderDetail.Data != null ? (List<OrderDetail>)orderDetail.Data : new List<OrderDetail>();
-        }
+        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid || Order == null)
+            if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            var result = await _orderBusiness.CreateOrder(Order);
-            Debug.WriteLine(result);
+            await _orderBusiness.CreateOrder(Order);
+
             return RedirectToPage("./Index");
         }
     }

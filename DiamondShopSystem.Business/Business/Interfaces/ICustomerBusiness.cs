@@ -5,7 +5,6 @@ namespace DiamondShopSystem.Business.Business.Interfaces
 {
     public interface ICustomerBusiness
     {
-
         Task<IBusinessResult> GetAllCustomerAsync();
         Task<IBusinessResult> GetCustomerByIdAsync(int customerId);
         Task<IBusinessResult> CreateCustomerAsync(Customer customer);

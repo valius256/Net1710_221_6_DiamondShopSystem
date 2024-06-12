@@ -1,7 +1,5 @@
 using DiamondShopSystem.Business.Business.Interfaces;
-using DiamondShopSystem.Business.Business.Implement;
 using DiamondShopSystem.Data.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DiamondShopSystem.RazorWebApp.Pages.DiamondSettingPage

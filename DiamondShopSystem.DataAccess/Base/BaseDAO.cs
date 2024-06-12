@@ -1,7 +1,7 @@
 ﻿using DiamondShopSystem.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace DiamondShopSystem.Data.Base
+namespace DiamondShopSystem.DataAccess.Base
 {
     public class BaseDAO<T> where T : class
     {

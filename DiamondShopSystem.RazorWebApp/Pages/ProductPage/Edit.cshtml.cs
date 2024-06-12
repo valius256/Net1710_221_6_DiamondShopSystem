@@ -1,10 +1,8 @@
-using DiamondShopSystem.Business.Business.Implement;
 using DiamondShopSystem.Business.Business.Interfaces;
 using DiamondShopSystem.Data.Models;
 using DiamondShopSystem.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
@@ -16,7 +14,7 @@ namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
         private readonly ISideStoneBusiness _sideStoneBusiness;
         private readonly IDiamondSettingBusiness _diamondSettingBusiness;
         private readonly UnitOfWork unitOfWork;
-        public EditModel(IProductBusiness productBusiness, IMainDiamondBusiness mainDiamondBusiness, 
+        public EditModel(IProductBusiness productBusiness, IMainDiamondBusiness mainDiamondBusiness,
             ISideStoneBusiness sideStoneBusiness, IDiamondSettingBusiness diamondSettingBusiness)
         {
             _productBusiness = productBusiness;
@@ -35,13 +33,13 @@ namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
         {
             var mainDiamonds = await _mainDiamondBusiness.GetAllMainDiamonds();
             MainDiamonds = mainDiamonds.Data != null ? (List<MainDiamond>)mainDiamonds.Data : new List<MainDiamond>();
-            var sideStones = await _sideStoneBusiness.GetAllSideStones  ();
+            var sideStones = await _sideStoneBusiness.GetAllSideStones();
             SideStones = sideStones.Data != null ? (List<SideStone>)sideStones.Data : new List<SideStone>();
             var diamondSettings = await _diamondSettingBusiness.GetAllDiamondSettings();
             DiamondSettings = diamondSettings.Data != null ? (List<DiamondSetting>)diamondSettings.Data : new List<DiamondSetting>();
 
-            var product = await  _productBusiness.GetByIdAsync(id);
-            Product = product.Data != null ? (Product)product.Data : new Product();        
+            var product = await _productBusiness.GetByIdAsync(id);
+            Product = product.Data != null ? (Product)product.Data : new Product();
         }
         public async Task<IActionResult> OnPostAsync()
         {
@@ -51,7 +49,7 @@ namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
             }
 
             var result = await _productBusiness.UpdateProduct(Product);
-            
+
             Debug.WriteLine(result);
             return RedirectToPage("./Index");
         }
