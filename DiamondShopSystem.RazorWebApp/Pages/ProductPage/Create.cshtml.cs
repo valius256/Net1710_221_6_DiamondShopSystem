@@ -1,8 +1,8 @@
-using DiamondShopSystem.Business.Business.Interfaces;
+﻿using DiamondShopSystem.Business.Business.Interfaces;
 using DiamondShopSystem.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
 {
@@ -10,42 +10,40 @@ namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
     {
         private readonly IProductBusiness _productBusiness;
         private readonly IMainDiamondBusiness _mainDiamondBusiness;
-        private readonly ISideStoneBusiness _sideStoneBusiness;
         private readonly IDiamondSettingBusiness _diamondSettingBusiness;
-
-        public CreateModel(IProductBusiness productBusiness, IMainDiamondBusiness mainDiamondBusiness,
-            ISideStoneBusiness sideStoneBusiness, IDiamondSettingBusiness diamondSettingBusiness)
+        private readonly ISideStoneBusiness _sideStoneBusiness;
+        public CreateModel(IProductBusiness productBusiness, IMainDiamondBusiness mainDiamondBusiness, IDiamondSettingBusiness diamondSettingBusiness, ISideStoneBusiness sideStoneBusiness)
         {
             _productBusiness = productBusiness;
             _mainDiamondBusiness = mainDiamondBusiness;
-            _sideStoneBusiness = sideStoneBusiness;
             _diamondSettingBusiness = diamondSettingBusiness;
+            _sideStoneBusiness = sideStoneBusiness;
+        }
+
+        public async Task<IActionResult> OnGetAsync()
+        {
+            var diamondSettings = (await _diamondSettingBusiness.GetAllDiamondSettings()).Data as List<DiamondSetting>;
+            var mainDiamonds = (await _mainDiamondBusiness.GetAllMainDiamonds()).Data as List<MainDiamond>;
+            var sideStones = (await _sideStoneBusiness.GetAllSideStones()).Data as List<SideStone>;
+
+            ViewData["DiamondSettingId"] = new SelectList(diamondSettings, "DiamondSettingId", "DiamondSettingId");
+            ViewData["MainDiamondId"] = new SelectList(mainDiamonds, "MainDiamondId", "MainDiamondId");
+            ViewData["SideStoneId"] = new SelectList(sideStones, "SideStoneId", "SideStoneId");
+            return Page();
         }
 
         [BindProperty]
-        public Product Product { get; set; }
-        public List<MainDiamond> MainDiamonds { get; set; }
-        public List<DiamondSetting> DiamondSettings { get; set; }
-        public List<SideStone> SideStones { get; set; }
+        public Product Product { get; set; } = default!;
 
-        public async Task OnGetAsync()
-        {
-            var mainDiamonds = await _mainDiamondBusiness.GetAllMainDiamonds();
-            MainDiamonds = mainDiamonds.Data != null ? (List<MainDiamond>)mainDiamonds.Data : new List<MainDiamond>();
-            var sideStones = await _sideStoneBusiness.GetAllSideStones();
-            SideStones = sideStones.Data != null ? (List<SideStone>)sideStones.Data : new List<SideStone>();
-            var diamondSettings = await _diamondSettingBusiness.GetAllDiamondSettings();
-            DiamondSettings = diamondSettings.Data != null ? (List<DiamondSetting>)diamondSettings.Data : new List<DiamondSetting>();
-        }
+        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid || Product == null)
+            if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            var result = await _productBusiness.CreateProduct(Product);
-            Debug.WriteLine(result);
+            await _productBusiness.CreateProduct(Product);
             return RedirectToPage("./Index");
         }
     }

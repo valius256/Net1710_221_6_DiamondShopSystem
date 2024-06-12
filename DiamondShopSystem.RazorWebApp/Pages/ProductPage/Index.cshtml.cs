@@ -1,28 +1,28 @@
-using DiamondShopSystem.Business.Business.Interfaces;
+﻿using DiamondShopSystem.Business.Business.Interfaces;
 using DiamondShopSystem.Data.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
 {
-    public class ProductModel : PageModel
+    public class IndexModel : PageModel
     {
         private readonly IProductBusiness _productBusiness;
-        public ProductModel(IProductBusiness productBusiness)
+        private readonly IMainDiamondBusiness _mainDiamondBusiness;
+        private readonly IDiamondSettingBusiness _diamondSettingBusiness;
+        private readonly ISideStoneBusiness _sideStoneBusiness;
+        public IndexModel(IProductBusiness productBusiness, IMainDiamondBusiness mainDiamondBusiness, IDiamondSettingBusiness diamondSettingBusiness, ISideStoneBusiness sideStoneBusiness)
         {
             _productBusiness = productBusiness;
+            _mainDiamondBusiness = mainDiamondBusiness;
+            _diamondSettingBusiness = diamondSettingBusiness;
+            _sideStoneBusiness = sideStoneBusiness;
         }
-        public IEnumerable<Product> Products { get; set; } = new List<Product>();
+
+        public IList<Product> Product { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
-            var result = await _productBusiness.GetAllProducts();
-            Products = result.Data != null ? (List<Product>)result.Data : new List<Product>();
-
-        }
-
-        public void OnPost()
-        {
-
+            Product = (await _productBusiness.GetAllProducts()).Data as List<Product> ?? new List<Product>();
         }
     }
 }

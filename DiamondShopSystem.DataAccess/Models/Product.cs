@@ -3,6 +3,8 @@
 using DiamondShopSystem.DataAccess.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace DiamondShopSystem.Data.Models;
 
