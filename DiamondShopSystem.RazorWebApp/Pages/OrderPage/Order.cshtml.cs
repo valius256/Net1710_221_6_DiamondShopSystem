@@ -1,4 +1,5 @@
 using DiamondShopSystem.Business.Business.Interfaces;
+using DiamondShopSystem.Data.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DiamondShopSystem.RazorWebApp.Pages.OrderPage
@@ -12,14 +13,14 @@ namespace DiamondShopSystem.RazorWebApp.Pages.OrderPage
             _orderBusiness = orderBusiness;
         }
 
-        public List<Data.Models.Order> Orders { get; set; }
+        public List<Order> Orders { get; set; }
 
         public async Task OnGetAsync()
         {
             var result = await _orderBusiness.GetAllOrder();
             if (result != null)
             {
-                Orders = result.Data != null ? (List<Data.Models.Order>)result.Data : new List<Data.Models.Order>();
+                Orders = result.Data != null ? (List<Order>)result.Data : new List<Order>();
             }
         }
     }

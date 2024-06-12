@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
+﻿using DiamondShopSystem.Business.Business.Interfaces;
 using DiamondShopSystem.Data.Models;
-using DiamondShopSystem.RazorWebApp.DataAccess;
-using DiamondShopSystem.Business.Business.Implement;
-using DiamondShopSystem.Business.Business.Interfaces;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
 {
@@ -26,7 +18,7 @@ namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
             _sideStoneBusiness = sideStoneBusiness;
         }
 
-        public IList<Product> Product { get;set; } = default!;
+        public IList<Product> Product { get; set; } = default!;
 
         public async Task OnGetAsync()
         {

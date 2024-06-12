@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DiamondShopSystem.Business.Business.Interfaces;
+using DiamondShopSystem.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using DiamondShopSystem.Data.Models;
-using DiamondShopSystem.RazorWebApp.DataAccess;
-using DiamondShopSystem.Business.Business.Implement;
-using Humanizer;
-using DiamondShopSystem.Business.Business.Interfaces;
 
 namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
 {
@@ -38,11 +31,11 @@ namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
                 return NotFound();
             }
 
-            var product = await _productBusiness.GetByIdAsync((int) id);
+            var product = await _productBusiness.GetByIdAsync((int)id);
             if (product.Data == null)
             {
                 return NotFound();
-            } 
+            }
             Product = product.Data as Product ?? new Product();
             var diamondSettings = (await _diamondSettingBusiness.GetAllDiamondSettings()).Data as List<DiamondSetting>;
             var mainDiamonds = (await _mainDiamondBusiness.GetAllMainDiamonds()).Data as List<MainDiamond>;

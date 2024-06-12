@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DiamondShopSystem.Data.Models;
 
-public partial class Product 
+public partial class Product
 {
     public int ProductId { get; set; }
 

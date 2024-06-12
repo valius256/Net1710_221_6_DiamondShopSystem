@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using DiamondShopSystem.Data.Models;
 
-namespace DiamondShopSystem.RazorWebApp.DataAccess
+namespace DiamondShopSystem.RazorWebApp.Data
 {
     public class DiamondShopSystemRazorWebAppContext : DbContext
     {
-        public DiamondShopSystemRazorWebAppContext (DbContextOptions<DiamondShopSystemRazorWebAppContext> options)
+        public DiamondShopSystemRazorWebAppContext(DbContextOptions<DiamondShopSystemRazorWebAppContext> options)
             : base(options)
         {
         }
 
-        public DbSet<DiamondShopSystem.Data.Models.Product> Product { get; set; } = default!;
+        public DbSet<Product> Product { get; set; } = default!;
     }
 }
