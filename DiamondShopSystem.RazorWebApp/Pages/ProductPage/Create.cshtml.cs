@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DiamondShopSystem.Business.Business.Interfaces;
+using DiamondShopSystem.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -28,9 +30,9 @@ namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
             var mainDiamonds = (await _mainDiamondBusiness.GetAllMainDiamonds()).Data as List<MainDiamond>;
             var sideStones = (await _sideStoneBusiness.GetAllSideStones()).Data as List<SideStone>;
 
-            ViewData["DiamondSettingId"] = new SelectList(diamondSettings, "DiamondSettingId", "DiamondSettingId");
-            ViewData["MainDiamondId"] = new SelectList(mainDiamonds, "MainDiamondId", "MainDiamondId");
-            ViewData["SideStoneId"] = new SelectList(sideStones, "SideStoneId", "SideStoneId");
+            ViewData["DiamondSettingId"] = new SelectList(diamondSettings, "DiamondSettingId", "Name");
+            ViewData["MainDiamondId"] = new SelectList(mainDiamonds, "MainDiamondId", "MainDiamondType");
+            ViewData["SideStoneId"] = new SelectList(sideStones, "SideStoneId", "Name");
             return Page();
         }
 
