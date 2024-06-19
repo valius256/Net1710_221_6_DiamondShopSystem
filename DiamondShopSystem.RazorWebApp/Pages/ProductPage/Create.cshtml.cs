@@ -5,11 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using DiamondShopSystem.Data.Models;
-using DiamondShopSystem.RazorWebApp.DataAccess;
-using DiamondShopSystem.Business.Business.Implement;
-using Microsoft.EntityFrameworkCore;
-using DiamondShopSystem.Business.Business.Interfaces;
 
 namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
 {

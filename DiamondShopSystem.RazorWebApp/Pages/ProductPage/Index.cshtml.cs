@@ -26,7 +26,7 @@ namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
             _sideStoneBusiness = sideStoneBusiness;
         }
 
-        public IList<Product> Product { get;set; } = default!;
+        public IList<Product> Product { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
