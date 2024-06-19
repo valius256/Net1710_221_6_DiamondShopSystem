@@ -2,6 +2,8 @@
 using DiamondShopSystem.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using DiamondShopSystem.Business.Business.Implement;
 
 namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
 {

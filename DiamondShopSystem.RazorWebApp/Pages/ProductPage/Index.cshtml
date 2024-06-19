@@ -10,6 +10,37 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+<div>
+    Filter
+</div>
+<div>
+    <form>
+        <div class="form-group">
+            <label asp-for="queryProductDto.ProductName" class="control-label">Name</label>
+            <input asp-for="queryProductDto.ProductName" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="queryProductDto.UpperPrice" class="control-label">Upper Price</label>
+            <input asp-for="queryProductDto.UpperPrice" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="queryProductDto.LowerPrice" class="control-label">Lower Price</label>
+            <input asp-for="queryProductDto.LowerPrice" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="queryProductDto.Description" class="control-label">Description</label>
+            <input asp-for="queryProductDto.Description" class="form-control" />
+        </div>
+        
+        <div class="form-group">
+            <label asp-for="queryProductDto.Status" class="control-label">Status</label>
+            <input asp-for="queryProductDto.Status" class="form-control" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Filter" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -95,13 +126,13 @@
                 @Html.DisplayFor(modelItem => item.SideStoneAmount)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DiamondSetting.DiamondSettingId)
+                @Html.DisplayFor(modelItem => item.DiamondSetting.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MainDiamond.MainDiamondId)
+                @Html.DisplayFor(modelItem => item.MainDiamond.MainDiamondType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SideStone.SideStoneId)
+                @Html.DisplayFor(modelItem => item.SideStone.Name)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ProductId">Edit</a> |
