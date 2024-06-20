@@ -1,4 +1,4 @@
-using DiamondShopSystem.Business;
+﻿using DiamondShopSystem.Business;
 using DiamondShopSystem.Data.Models;
 using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
@@ -9,8 +9,6 @@ builder.Services.AddDbContext<Net1710_221_6_DiamondShopSystemContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.")));
 builder.Services.DIServices();
 var app = builder.Build();
-
-
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

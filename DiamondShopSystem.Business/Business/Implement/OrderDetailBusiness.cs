@@ -3,7 +3,6 @@ using DiamondShopSystem.Business.ViewModels;
 using DiamondShopSystem.Common;
 using DiamondShopSystem.Data.Models;
 using DiamondShopSystem.DataAccess;
-using DiamondShopSystem.DataAccess.Models;
 
 namespace DiamondShopSystem.Business.Business.Implement
 {
@@ -36,12 +35,13 @@ namespace DiamondShopSystem.Business.Business.Implement
                 return new BusinessResult(-4, e.Message.ToString());
             }
         }
-
-        public async Task<IBusinessResult> GetOrderDetailById(int id)
+        
+        public async Task<IBusinessResult> GetOrderDetailById(int? id)
         {
             try
             {
-                var orderDetail = await _unitOfWork.OrderDetailRepository.GetByIdAsync(id);
+                var orderDetail = await _unitOfWork.OrderDetailRepository
+                    .GetByIdAsync(id);
                 if (orderDetail == null)
                 {
                     return new BusinessResult(Const.WARNING_NO_DATA_CODE, Const.FAIL_READ_MSG);

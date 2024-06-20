@@ -1,0 +1,123 @@
+﻿@page
+@model DiamondShopSystem.RazorWebApp.Pages.OrderDetailPage.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<div>
+    <h2>Filter Order Details</h2>
+</div>
+<div>
+    <form method="get">
+        <div class="form-group">
+            <label asp-for="QueryOrderDetailDto.Quantity" class="control-label">Quantity</label>
+            <input asp-for="QueryOrderDetailDto.Quantity" class="form-control" type="number" />
+        </div>
+        <div class="form-group">
+            <label asp-for="QueryOrderDetailDto.Amount" class="control-label">Amount</label>
+            <input asp-for="QueryOrderDetailDto.Amount" class="form-control" type="number" step="0.01" />
+        </div>
+        <div class="form-group">
+            <label asp-for="QueryOrderDetailDto.ShipmentTrackingNumber" class="control-label">Shipment Tracking Number</label>
+            <input asp-for="QueryOrderDetailDto.ShipmentTrackingNumber" class="form-control" type="text" />
+        </div>
+        <div class="form-group">
+            <label asp-for="QueryOrderDetailDto.ShipmentDate" class="control-label">Shipment Date</label>
+            <input asp-for="QueryOrderDetailDto.ShipmentDate" class="form-control" type="date" />
+        </div>
+        <div class="form-group">
+            <label asp-for="QueryOrderDetailDto.ProductId" class="control-label">Product Id</label>
+            <input asp-for="QueryOrderDetailDto.ProductId" class="form-control" type="text" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Filter" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDetail[0].OrderDetailId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDetail[0].Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDetail[0].Fee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDetail[0].Discount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDetail[0].Tax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDetail[0].TotalAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDetail[0].ShipmentTrackingNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDetail[0].ShipmentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDetail[0].Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDetail[0].Product)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderDetail)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDetailId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fee)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Discount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tax)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalAmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShipmentTrackingNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShipmentDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.ProductId)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.OrderDetailId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.OrderDetailId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.OrderDetailId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

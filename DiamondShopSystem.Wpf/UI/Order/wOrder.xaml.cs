@@ -40,7 +40,6 @@ namespace Net1710_221_6_DiamondShopSystem.WpfApp.UI
         {
             try
             {
-
                 var item = await _orderBusiness.GetOrderById(Int32.Parse(txtOrderId.Text));
 
                 if (item.Data == null)

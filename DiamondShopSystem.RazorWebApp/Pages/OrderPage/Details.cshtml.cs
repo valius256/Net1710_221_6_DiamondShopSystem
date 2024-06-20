@@ -1,9 +1,7 @@
-﻿using DiamondShopSystem.Business.Business.Implement;
-using DiamondShopSystem.Business.Business.Interfaces;
+﻿using DiamondShopSystem.Business.Business.Interfaces;
 using DiamondShopSystem.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 
 
 namespace DiamondShopSystem.RazorWebApp.Pages.OrderPage
