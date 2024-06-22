@@ -3,7 +3,7 @@
 using DiamondShopSystem.Business.Business.Interfaces;
 using DiamondShopSystem.Business.ViewModels;
 using DiamondShopSystem.Common;
-using DiamondShopSystem.Data.Models;
+using DiamondShopSystem.DataAccess.Models;
 using DiamondShopSystem.DataAccess;
 
 namespace DiamondShopSystem.Business.Business.Implement

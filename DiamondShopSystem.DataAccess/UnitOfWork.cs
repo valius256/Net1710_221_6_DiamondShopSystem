@@ -1,4 +1,4 @@
-﻿using DiamondShopSystem.Data.Models;
+﻿using DiamondShopSystem.DataAccess.Models;
 using DiamondShopSystem.DataAccess.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -93,7 +93,7 @@ namespace DiamondShopSystem.DataAccess
         {
             int result = -1;
 
-            //System.Data.IsolationLevel.Snapshot
+            //System.DataAccess.IsolationLevel.Snapshot
             using (var dbContextTransaction = _unitOfWorkContext.Database.BeginTransaction())
             {
                 try
@@ -116,7 +116,7 @@ namespace DiamondShopSystem.DataAccess
         {
             int result = -1;
 
-            //System.Data.IsolationLevel.Snapshot
+            //System.DataAccess.IsolationLevel.Snapshot
             using (var dbContextTransaction = _unitOfWorkContext.Database.BeginTransaction())
             {
                 try

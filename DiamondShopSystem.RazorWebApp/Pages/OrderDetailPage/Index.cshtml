@@ -24,14 +24,6 @@
             <input asp-for="QueryOrderDetailDto.Amount" class="form-control" type="number" step="0.01" />
         </div>
         <div class="form-group">
-            <label asp-for="QueryOrderDetailDto.ShipmentTrackingNumber" class="control-label">Shipment Tracking Number</label>
-            <input asp-for="QueryOrderDetailDto.ShipmentTrackingNumber" class="form-control" type="text" />
-        </div>
-        <div class="form-group">
-            <label asp-for="QueryOrderDetailDto.ShipmentDate" class="control-label">Shipment Date</label>
-            <input asp-for="QueryOrderDetailDto.ShipmentDate" class="form-control" type="date" />
-        </div>
-        <div class="form-group">
             <label asp-for="QueryOrderDetailDto.ProductId" class="control-label">Product Id</label>
             <input asp-for="QueryOrderDetailDto.ProductId" class="form-control" type="text" />
         </div>
@@ -49,31 +41,31 @@
                 @Html.DisplayNameFor(model => model.OrderDetail[0].OrderDetailId)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.OrderDetail[0].OrderId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDetail[0].ProductId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDetail[0].Quantity)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.OrderDetail[0].Amount)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.OrderDetail[0].Fee)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.OrderDetail[0].CreateAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDetail[0].UpdateAt)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.OrderDetail[0].Discount)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OrderDetail[0].Tax)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDetail[0].TotalAmount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDetail[0].ShipmentTrackingNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDetail[0].ShipmentDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDetail[0].Quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDetail[0].Product)
+                @Html.DisplayNameFor(model => model.OrderDetail[0].OrderDetailNote)
             </th>
             <th></th>
         </tr>
@@ -86,31 +78,31 @@
                     @Html.DisplayFor(modelItem => item.OrderDetailId)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.OrderId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Amount)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Fee)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.CreateAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdateAt)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Discount)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Tax)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalAmount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ShipmentTrackingNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ShipmentDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Product.ProductId)
+                    @Html.DisplayFor(modelItem => item.OrderDetailNote)
                 </td>
                 <td>
                     <a asp-page="./Edit" asp-route-id="@item.OrderDetailId">Edit</a> |

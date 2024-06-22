@@ -31,46 +31,40 @@
             @Html.DisplayFor(model => model.OrderDetail.Fee)
         </dd>
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderDetail.CreateAt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderDetail.CreateAt)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderDetail.UpdateAt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderDetail.UpdateAt)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.OrderDetail.Discount)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.OrderDetail.Discount)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.OrderDetail.Tax)
+            @Html.DisplayNameFor(model => model.OrderDetail.OrderDetailNote)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.OrderDetail.Tax)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.OrderDetail.TotalAmount)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.OrderDetail.TotalAmount)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.OrderDetail.ShipmentTrackingNumber)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.OrderDetail.ShipmentTrackingNumber)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.OrderDetail.ShipmentDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.OrderDetail.ShipmentDate)
+            @Html.DisplayFor(model => model.OrderDetail.OrderDetailNote)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.OrderDetail.Order)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.OrderDetail.Order.OrderId)
+            @Html.DisplayFor(model => model.OrderDetail.Order.DeliveryStatus)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.OrderDetail.Product)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.OrderDetail.Product.ProductId)
+            @Html.DisplayFor(model => model.OrderDetail.Product.ProductName)
         </dd>
     </dl>
     

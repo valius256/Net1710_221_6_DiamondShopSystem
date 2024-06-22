@@ -1,0 +1,139 @@
+﻿@page
+@model DiamondShopSystem.RazorWebApp.Pages.MainDiamondPage.IndexModel
+
+@{
+    ViewData["Title"] = "Main Diamonds";
+}
+
+<h1>Main Diamonds</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<div>
+    Filter
+</div>
+<div>
+    <form method="get">
+        <div class="form-group">
+            <label asp-for="queryMainDiamondDto.Name" class="control-label">Name</label>
+            <input asp-for="queryMainDiamondDto.Name" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="queryMainDiamondDto.Description" class="control-label">Description</label>
+            <input asp-for="queryMainDiamondDto.Description" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="queryMainDiamondDto.CaratWeight" class="control-label">Carat Weight</label>
+            <input asp-for="queryMainDiamondDto.CaratWeight" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="queryMainDiamondDto.Color" class="control-label">Color</label>
+            <input asp-for="queryMainDiamondDto.Color" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="queryMainDiamondDto.Clarity" class="control-label">Clarity</label>
+            <input asp-for="queryMainDiamondDto.Clarity" class="form-control" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Filter" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MainDiamond[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MainDiamond[0].MainDiamondType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MainDiamond[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MainDiamond[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MainDiamond[0].Certificate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MainDiamond[0].Origin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MainDiamond[0].Size)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MainDiamond[0].CaratWeight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MainDiamond[0].Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MainDiamond[0].Clarity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MainDiamond[0].Cut)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MainDiamond[0].CreateAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MainDiamond[0].UpdateAt)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.MainDiamond)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MainDiamondType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Certificate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Origin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Size)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CaratWeight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Color)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Clarity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cut)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdateAt)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.MainDiamondId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.MainDiamondId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.MainDiamondId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

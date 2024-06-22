@@ -1,6 +1,6 @@
 
 
-using DiamondShopSystem.Data.Models;
+using DiamondShopSystem.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiamondShopSystem.DataAccess.Base

@@ -1,0 +1,79 @@
+﻿@page
+@model DiamondShopSystem.RazorWebApp.Pages.DiamondSettingPage.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>DiamondSetting</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DiamondSetting.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DiamondSetting.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DiamondSetting.DiamondSettingCategory)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DiamondSetting.DiamondSettingCategory)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DiamondSetting.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DiamondSetting.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DiamondSetting.CreateAt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DiamondSetting.CreateAt)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DiamondSetting.UpdateAt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DiamondSetting.UpdateAt)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DiamondSetting.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DiamondSetting.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DiamondSetting.Image)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DiamondSetting.Image)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DiamondSetting.DiamondSettingMaterial)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DiamondSetting.DiamondSettingMaterial)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DiamondSetting.DiamondSettingWeight)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DiamondSetting.DiamondSettingWeight)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DiamondSetting.DiamondSettingSize)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DiamondSetting.DiamondSettingSize)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.DiamondSetting.DiamondSettingId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
