@@ -1,6 +1,6 @@
 ﻿using DiamondShopSystem.Business.Business.Implement;
 using DiamondShopSystem.Business.Business.Interfaces;
-using DiamondShopSystem.Data.Models;
+using DiamondShopSystem.DataAccess.Models;
 using System.Windows;
 using System.Windows.Controls;
 

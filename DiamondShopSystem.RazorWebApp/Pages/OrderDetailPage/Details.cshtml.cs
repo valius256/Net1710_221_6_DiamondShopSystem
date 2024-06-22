@@ -1,18 +1,22 @@
-﻿using DiamondShopSystem.Business.Business.Interfaces;
-using DiamondShopSystem.Data.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using DiamondShopSystem.DataAccess.Models;
+using DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext;
 
 namespace DiamondShopSystem.RazorWebApp.Pages.OrderDetailPage
 {
     public class DetailsModel : PageModel
     {
-        private readonly IOrderDetailBusiness _orderDetailBusiness;
+        private readonly DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext.cs _context;
 
-        public DetailsModel(IOrderDetailBusiness orderDetailBusiness)
+        public DetailsModel(DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext.cs context)
         {
-            _orderDetailBusiness = orderDetailBusiness;
+            _context = context;
         }
 
         public OrderDetail OrderDetail { get; set; } = default!;
@@ -24,7 +28,7 @@ namespace DiamondShopSystem.RazorWebApp.Pages.OrderDetailPage
                 return NotFound();
             }
 
-            var orderdetail = await _orderDetailBusiness.GetOrderDetailById(id) as OrderDetail;
+            var orderdetail = await _context.OrderDetail.FirstOrDefaultAsync(m => m.OrderDetailId == id);
             if (orderdetail == null)
             {
                 return NotFound();

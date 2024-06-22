@@ -1,40 +1,42 @@
-﻿using DiamondShopSystem.Business.Business.Interfaces;
-using DiamondShopSystem.Data.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using DiamondShopSystem.DataAccess.Models;
+using DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext;
 
 namespace DiamondShopSystem.RazorWebApp.Pages.OrderPage
 {
     public class EditModel : PageModel
     {
-        private readonly IOrderBusiness _orderBusiness;
-        private readonly ICustomerBusiness _customerBusiness;
-        public EditModel(IOrderBusiness orderBusiness)
+        private readonly DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext.cs _context;
+
+        public EditModel(DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext.cs context)
         {
-            _orderBusiness = orderBusiness;
+            _context = context;
         }
-
-
 
         [BindProperty]
         public Order Order { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int id)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var order = await _orderBusiness.GetOrderById(id);
+            var order =  await _context.Order.FirstOrDefaultAsync(m => m.OrderId == id);
             if (order == null)
             {
                 return NotFound();
             }
-            var res = (await _customerBusiness.GetAllCustomerAsync()).Data;
-            ViewData["CustomerId"] = new SelectList((await _customerBusiness.GetAllCustomerAsync()).Data as List<Customer>, "CustomerId", "CustomerId");
+            Order = order;
+           ViewData["CustomerId"] = new SelectList(_context.Customer, "CustomerId", "Address");
             return Page();
         }
 
@@ -47,11 +49,11 @@ namespace DiamondShopSystem.RazorWebApp.Pages.OrderPage
                 return Page();
             }
 
-            //_context.Attach(Order).State = EntityState.Modified;
+            _context.Attach(Order).State = EntityState.Modified;
 
             try
             {
-                await _orderBusiness.UpdateOrder(Order);
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -70,8 +72,7 @@ namespace DiamondShopSystem.RazorWebApp.Pages.OrderPage
 
         private bool OrderExists(int id)
         {
-            var rs =  _orderBusiness.GetOrderById(id).Result as Order;
-            return rs != null;
+            return _context.Order.Any(e => e.OrderId == id);
         }
     }
 }

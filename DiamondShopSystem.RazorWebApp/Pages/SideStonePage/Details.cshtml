@@ -1,0 +1,73 @@
+﻿@page
+@model DiamondShopSystem.RazorWebApp.Pages.SideStonePage.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>SideStone</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SideStone.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SideStone.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SideStone.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SideStone.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SideStone.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SideStone.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SideStone.CreateAt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SideStone.CreateAt)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SideStone.UpdateAt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SideStone.UpdateAt)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SideStone.SideStoneWeight)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SideStone.SideStoneWeight)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SideStone.SideStoneSize)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SideStone.SideStoneSize)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SideStone.SideStoneMaterial)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SideStone.SideStoneMaterial)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SideStone.SideStoneCategory)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SideStone.SideStoneCategory)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.SideStone.SideStoneId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

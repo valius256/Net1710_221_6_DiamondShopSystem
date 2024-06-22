@@ -1,0 +1,121 @@
+﻿@page
+@model DiamondShopSystem.RazorWebApp.Pages.DiamondSettingPage.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Diamond Settings</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<div>
+    Filter
+</div>
+<div>
+    <form method="get">
+        <div class="form-group">
+            <label asp-for="queryDiamondSettingDto.Name" class="control-label">Name</label>
+            <input asp-for="queryDiamondSettingDto.Name" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="queryDiamondSettingDto.UpperPrice" class="control-label">Upper Price</label>
+            <input asp-for="queryDiamondSettingDto.UpperPrice" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="queryDiamondSettingDto.LowerPrice" class="control-label">Lower Price</label>
+            <input asp-for="queryDiamondSettingDto.LowerPrice" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="queryDiamondSettingDto.Description" class="control-label">Description</label>
+            <input asp-for="queryDiamondSettingDto.Description" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="queryDiamondSettingDto.DiamondSettingMaterial" class="control-label">Material</label>
+            <input asp-for="queryDiamondSettingDto.DiamondSettingMaterial" class="form-control" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Filter" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DiamondSetting[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiamondSetting[0].DiamondSettingCategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiamondSetting[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiamondSetting[0].CreateAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiamondSetting[0].UpdateAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiamondSetting[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiamondSetting[0].Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiamondSetting[0].DiamondSettingMaterial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiamondSetting[0].DiamondSettingWeight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiamondSetting[0].DiamondSettingSize)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.DiamondSetting)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiamondSettingCategory)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdateAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Image)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiamondSettingMaterial)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiamondSettingWeight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiamondSettingSize)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.DiamondSettingId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.DiamondSettingId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.DiamondSettingId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -9611,7 +9611,7 @@ jQuery.extend( {
 		// Change '%20' to '+' if this is encoded form body content (gh-2658)
 		} else if ( s.data && s.processData &&
 			( s.contentType || "" ).indexOf( "application/x-www-form-urlencoded" ) === 0 ) {
-			s.data = s.data.replace( r20, "+" );
+			s.data = s.DataAccess.replace( r20, "+" );
 		}
 
 		// Set the If-Modified-Since and/or If-None-Match header, if in ifModified mode.

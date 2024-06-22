@@ -1,6 +1,6 @@
 ﻿using DiamondShopSystem.Business.Business.Interfaces;
 using DiamondShopSystem.Business.Dtos;
-using DiamondShopSystem.Data.Models;
+using DiamondShopSystem.DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -18,9 +18,9 @@ namespace DiamondShopSystem.RazorWebApp.Pages.OrderPage
 
 
         [BindProperty(SupportsGet = true)]
-        public QueryOrderDtos QueryOrderDto { get; set; } = default!;
+        public QueryOrderDto QueryOrderDto { get; set; } = default!;
 
-        public IList<Order> Order { get; set; } = default!;
+        public IList<Order> Order { get; set; } = new List<Order>();//default!;
 
         public async Task OnGetAsync()
         {
@@ -56,19 +56,6 @@ namespace DiamondShopSystem.RazorWebApp.Pages.OrderPage
                         .ToList();
                 }
 
-                if (!string.IsNullOrEmpty(QueryOrderDto.Currency))
-                {
-                    orders = orders
-                        .Where(o => o.Currency.Contains(QueryOrderDto.Currency))
-                        .ToList();
-                }
-
-                if (!string.IsNullOrEmpty(QueryOrderDto.Region))
-                {
-                    orders = orders
-                        .Where(o => o.Region.Contains(QueryOrderDto.Region))
-                        .ToList();
-                }
             }
 
             Order = orders;
