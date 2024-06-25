@@ -35,5 +35,29 @@ namespace DiamondShopSystem.Wpf
             order.Owner = this;
             order.Show();
         }
+        private async void Open_wCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            var customer = new wCustomer();
+            customer.Owner = this;
+            customer.Show();
+        }
+        private async void Open_wMainDiamond_Click(object sender, RoutedEventArgs e)
+        {
+            var mainDiamond = new wMainDiamond();
+            mainDiamond.Owner = this;
+            mainDiamond.Show();
+        }
+        private async void Open_wDiamondSetting_Click(object sender, RoutedEventArgs e)
+        {
+            var diamondSetting = new wDiamondSetting();
+            diamondSetting.Owner = this;
+            diamondSetting.Show();
+        }
+        private async void Open_wSideStone_Click(object sender, RoutedEventArgs e)
+        {
+            var sideStone = new wSideStone();
+            sideStone.Owner = this;
+            sideStone.Show();
+        }
     }
 }
