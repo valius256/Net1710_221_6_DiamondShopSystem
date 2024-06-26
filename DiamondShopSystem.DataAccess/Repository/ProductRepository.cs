@@ -1,6 +1,6 @@
 ﻿using DiamondShopSystem.Common.Dtos;
-using DiamondShopSystem.Data.Models;
 using DiamondShopSystem.DataAccess.Base;
+using DiamondShopSystem.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiamondShopSystem.DataAccess.Repository
@@ -39,7 +39,7 @@ namespace DiamondShopSystem.DataAccess.Repository
             }
             if (queryProductDto.Description != null)
             {
-                query = query.Where(p => p.Description.Contains(queryProductDto.Description));
+                query = query.Where(p => p.Description != null && p.Description.Contains(queryProductDto.Description));
             }
 
             return await query
