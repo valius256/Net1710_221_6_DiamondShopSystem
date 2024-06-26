@@ -1,6 +1,6 @@
 
 
-using DiamondShopSystem.Data.Models;
+using DiamondShopSystem.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiamondShopSystem.DataAccess.Base
@@ -108,7 +108,8 @@ namespace DiamondShopSystem.DataAccess.Base
 
         public async Task<T?> GetByIdAsync(int id)
         {
-            return await _dbSet.FindAsync(id);
+            return await _dbSet
+                .FindAsync(id);
         }
 
         public T? GetById(string code)

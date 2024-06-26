@@ -15,6 +15,7 @@ namespace DiamondShopSystem.Business
             service.AddScoped<IOrderBusiness, OrderBusiness>();
             service.AddScoped<ICustomerBusiness, CustomerBusiness>();
             service.AddScoped<IOrderDetailBusiness, OrderDetailBusiness>();
+
         }
     }
 }

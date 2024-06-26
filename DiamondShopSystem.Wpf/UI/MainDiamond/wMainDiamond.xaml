@@ -1,0 +1,86 @@
+﻿<Window x:Class="DiamondShopSystem.Wpf.UI.wMainDiamond"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DiamondShopSystem.Wpf.UI"
+        mc:Ignorable="d"
+        Title="wMainDiamond" Height="450" Width="800">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+
+                <GroupBox Name="groupBoxMainDiamondForm" Header="MainDiamond Details" Grid.Row="1">
+                    <Grid Name="grdMainDiamondForm" Height="160">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Grid.Row="0" Content="Name" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+                        <TextBox Grid.Column="1" Grid.Row="0" x:Name="txtMainDiamondName" Height="25" Text="{Binding Name, Mode=TwoWay}"  Margin="5"  Width="180" HorizontalAlignment="Left"/>
+                        <Label Grid.Column="2" Grid.Row="0" Content="Description" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+                        <TextBox Grid.Row="0" Grid.Column="0" x:Name="txtDescription" Height="25" Text="{Binding Description, Mode=TwoWay}"  Margin="5"  Width="180" HorizontalAlignment="Left"/>
+                        <Label Grid.Column="4" Grid.Row="0" Content="Price" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+                        <TextBox Grid.Column="5" Grid.Row="0" x:Name="txtPrice" Height="25" Text="{Binding Price, Mode=TwoWay}"  Margin="5"  Width="180" HorizontalAlignment="Left"/>
+                        <Label Grid.Column="0" Grid.Row="1" Content="Certificate" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+                        <TextBox Grid.Column="1" Grid.Row="1" x:Name="txtCertificate" Height="25" Text="{Binding Certificate, Mode=TwoWay}"  Margin="5"  Width="180" HorizontalAlignment="Left"/>
+                        <Label Grid.Column="2" Grid.Row="1" Content="Origin" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+                        <TextBox Grid.Column="3" Grid.Row="1" x:Name="txtOrigin" Height="25" Text="{Binding Origin, Mode=TwoWay}"  Margin="5"  Width="180" HorizontalAlignment="Left"/>
+                        <Label Grid.Column="4" Grid.Row="1" Content="Size" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+                        <TextBox Grid.Column="5" Grid.Row="1" x:Name="txtSize" Height="25" Text="{Binding Size, Mode=TwoWay}"  Margin="5"  Width="180" HorizontalAlignment="Left"/>
+                        <Label Grid.Column="0" Grid.Row="2" Content="Carat Weight" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+                        <TextBox Grid.Column="1" Grid.Row="2" x:Name="txtCaratWeight" Height="25" Text="{Binding CaratWeight, Mode=TwoWay}"  Margin="5"  Width="180" HorizontalAlignment="Left"/>
+                        <Label Grid.Column="2" Grid.Row="2" Content="Color" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+                        <TextBox Grid.Column="3" Grid.Row="2" x:Name="txtColor" Height="25" Text="{Binding Color, Mode=TwoWay}"  Margin="5"  Width="180" HorizontalAlignment="Left"/>
+                        <Label Grid.Column="4" Grid.Row="2" Content="Clarity" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+                        <TextBox Grid.Column="5" Grid.Row="2" x:Name="txtClarity" Height="25" Text="{Binding Clarity, Mode=TwoWay}"  Margin="5"  Width="180" HorizontalAlignment="Left"/>
+                        <Label Grid.Column="0" Grid.Row="3" Content="Cut" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+                        <TextBox Grid.Column="1" Grid.Row="3" x:Name="txtCut" Height="25" Text="{Binding Cut, Mode=TwoWay}"  Margin="5"  Width="180" HorizontalAlignment="Left"/>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+            <StackPanel Height="40" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="ButtonSave" Content="Save" Height="30" Width="80" Click="ButtonSave_Click"/>
+                <Button x:Name="ButtonCancel" Content="Cancel" Height="30" Width="80" Click="ButtonCancel_Click"/>
+            </StackPanel>
+            <StackPanel Height="210">
+                <DataGrid x:Name="grdMainDiamond" AutoGenerateColumns="False" ItemsSource="{Binding MainDiamond}" CanUserAddRows="False" Height="200" SelectionMode="Single" SelectionUnit="FullRow">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Visibility="Visible"/>
+                        <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="200"  IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="100"  IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Certificate" Binding="{Binding Certificate}" Width="150"  IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Origin" Binding="{Binding Origin}" Width="100"  IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Size" Binding="{Binding Size}" Width="100"  IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Carat Weight" Binding="{Binding CaratWeight}" Width="100"  IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Color" Binding="{Binding Color}" Width="100"  IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Clarity" Binding="{Binding Clarity}" Width="100"  IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Cut" Binding="{Binding Cut}" Width="100"  IsReadOnly="True"/>
+                        <DataGridTemplateColumn Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Delete" Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                            CommandParameter="{Binding MainDiamondId}" Click="grdMainDiamond_ButtonDelete_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

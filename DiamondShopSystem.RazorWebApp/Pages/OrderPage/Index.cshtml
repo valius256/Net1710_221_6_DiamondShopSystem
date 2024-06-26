@@ -2,17 +2,55 @@
 @model DiamondShopSystem.RazorWebApp.Pages.OrderPage.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Orders";
 }
 
-<h1>Index</h1>
+<h1>Orders</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+
+<div>
+    <h2>Filter Orders</h2>
+</div>
+<div>
+    <form method="get">
+        <div class="form-group">
+            <label asp-for="QueryOrderDto.CustomerId" class="control-label">Customer ID</label>
+            <input asp-for="QueryOrderDto.CustomerId" class="form-control" type="number" />
+        </div>
+        <div class="form-group">
+            <label asp-for="QueryOrderDto.OrderDate" class="control-label">Order Date</label>
+            <input asp-for="QueryOrderDto.OrderDate" class="form-control" type="date" />
+        </div>
+        <div class="form-group">
+            <label asp-for="QueryOrderDto.OrderStatus" class="control-label">Order Status</label>
+            <input asp-for="QueryOrderDto.OrderStatus" class="form-control" type="text" />
+        </div>
+        <div class="form-group">
+            <label asp-for="QueryOrderDto.DeliveryStatus" class="control-label">Delivery Status</label>
+            <input asp-for="QueryOrderDto.DeliveryStatus" class="form-control" type="text" />
+        </div>
+        <div class="form-group">
+            <label asp-for="QueryOrderDto.TotalAmount" class="control-label">Total Amount</label>
+            <input asp-for="QueryOrderDto.TotalAmount" class="form-control" type="number" step="0.01" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Filter" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].OrderId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].CustomerId)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Order[0].OrderDate)
             </th>
@@ -32,41 +70,54 @@
                 @Html.DisplayNameFor(model => model.Order[0].UpdateAt)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].Customer)
+                @Html.DisplayNameFor(model => model.Order[0].Note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].TotalPrice)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Order) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeliveryStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalAmount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdateAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Customer.CustomerId)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.OrderId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.OrderId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.OrderId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Order)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeliveryStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalAmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdateAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Note)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPrice)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.OrderId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.OrderId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.OrderId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

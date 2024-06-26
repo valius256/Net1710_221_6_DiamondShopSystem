@@ -1,6 +1,6 @@
 ﻿using DiamondShopSystem.Business.Business.Implement;
 using DiamondShopSystem.Business.Business.Interfaces;
-using DiamondShopSystem.Data.Models;
+using DiamondShopSystem.DataAccess.Models;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -40,7 +40,6 @@ namespace Net1710_221_6_DiamondShopSystem.WpfApp.UI
         {
             try
             {
-
                 var item = await _orderBusiness.GetOrderById(Int32.Parse(txtOrderId.Text));
 
                 if (item.Data == null)

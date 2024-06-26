@@ -1,16 +1,18 @@
-using DiamondShopSystem.Business;
-using DiamondShopSystem.Data.Models;
+﻿using DiamondShopSystem.Business;
+using DiamondShopSystem.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<cs>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("cs") ?? throw new InvalidOperationException("Connection string 'cs' not found.")));
 builder.Services.AddDbContext<Net1710_221_6_DiamondShopSystemContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.")));
 builder.Services.DIServices();
 var app = builder.Build();
-
-
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

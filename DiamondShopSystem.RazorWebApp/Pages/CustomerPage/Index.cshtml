@@ -1,0 +1,128 @@
+﻿@page
+@model DiamondShopSystem.RazorWebApp.Pages.CustomerPage.IndexModel
+
+@{
+    ViewData["Title"] = "Customers";
+}
+
+<h1>Customers</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<div>
+    Filter
+</div>
+
+<div>
+    <form method="get">
+        <div class="form-group">
+            <label asp-for="queryCustomerDto.Email" class="control-label">Email</label>
+            <input asp-for="queryCustomerDto.Email" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="queryCustomerDto.Name" class="control-label">Name</label>
+            <input asp-for="queryCustomerDto.Name" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="queryCustomerDto.PhoneNumber" class="control-label">Phone Number</label>
+            <input asp-for="queryCustomerDto.PhoneNumber" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="queryCustomerDto.Address" class="control-label">Address</label>
+            <input asp-for="queryCustomerDto.Address" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="queryCustomerDto.CompanyName" class="control-label">Company Name</label>
+            <input asp-for="queryCustomerDto.CompanyName" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="queryCustomerDto.Gender" class="control-label">Gender</label>
+            <select asp-for="queryCustomerDto.Gender" class="form-control">
+                <option value="">Select Gender</option>
+                <option value="0">Male</option>
+                <option value="1">Female</option>
+                <option value="2">Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Filter" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer[0].PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer[0].Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer[0].Birthday)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer[0].Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer[0].CompanyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer[0].CreateAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer[0].UpdateAt)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Customer)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Birthday)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdateAt)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.CustomerId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.CustomerId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.CustomerId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

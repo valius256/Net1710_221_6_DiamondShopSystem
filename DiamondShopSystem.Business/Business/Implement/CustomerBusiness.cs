@@ -1,7 +1,7 @@
 ﻿using DiamondShopSystem.Business.Business.Interfaces;
 using DiamondShopSystem.Business.ViewModels;
 using DiamondShopSystem.Common;
-using DiamondShopSystem.Data.Models;
+using DiamondShopSystem.DataAccess.Models;
 using DiamondShopSystem.DataAccess;
 
 namespace DiamondShopSystem.Business.Business.Implement
@@ -112,6 +112,34 @@ namespace DiamondShopSystem.Business.Business.Implement
                 else
                 {
                     return new BusinessResult(Const.SUCCESS_DELETE_CODE, Const.SUCCESS_DELETE_MSG, result);
+                }
+            }
+            catch (Exception e)
+            {
+                return new BusinessResult(Const.ERROR_EXCEPTION, e.Message);
+            }
+        }
+
+        public async Task<IBusinessResult> DeleteCustomerAsync(int customerID)
+        {
+            try
+            {
+                var customer = await _unitOfWork.CustomerRepository.GetByIdAsync(customerID);
+                if (customer == null)
+                {
+                    var result = await _unitOfWork.CustomerRepository.RemoveAsync(customer);
+                    if (result)
+                    {
+                        return new BusinessResult(Const.FAIL_DELETE_CODE, Const.FAIL_DELETE_MSG);
+                    }
+                    else
+                    {
+                        return new BusinessResult(Const.SUCCESS_DELETE_CODE, Const.SUCCESS_DELETE_MSG, result);
+                    }
+                }
+                else
+                {
+                    return new BusinessResult(Const.WARNING_NO_DATA_CODE, Const.WARNING_NO_DATA__MSG);
                 }
             }
             catch (Exception e)

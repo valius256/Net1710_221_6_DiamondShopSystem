@@ -1,0 +1,79 @@
+﻿@page
+@model DiamondShopSystem.RazorWebApp.Pages.DiamondSettingPage.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>DiamondSetting</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DiamondSetting.Name" class="control-label"></label>
+                <input asp-for="DiamondSetting.Name" class="form-control" />
+                <span asp-validation-for="DiamondSetting.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiamondSetting.DiamondSettingCategory" class="control-label"></label>
+                <input asp-for="DiamondSetting.DiamondSettingCategory" class="form-control" />
+                <span asp-validation-for="DiamondSetting.DiamondSettingCategory" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiamondSetting.Description" class="control-label"></label>
+                <input asp-for="DiamondSetting.Description" class="form-control" />
+                <span asp-validation-for="DiamondSetting.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiamondSetting.CreateAt" class="control-label"></label>
+                <input asp-for="DiamondSetting.CreateAt" class="form-control" />
+                <span asp-validation-for="DiamondSetting.CreateAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiamondSetting.UpdateAt" class="control-label"></label>
+                <input asp-for="DiamondSetting.UpdateAt" class="form-control" />
+                <span asp-validation-for="DiamondSetting.UpdateAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiamondSetting.Price" class="control-label"></label>
+                <input asp-for="DiamondSetting.Price" class="form-control" />
+                <span asp-validation-for="DiamondSetting.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiamondSetting.Image" class="control-label"></label>
+                <input asp-for="DiamondSetting.Image" class="form-control" />
+                <span asp-validation-for="DiamondSetting.Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiamondSetting.DiamondSettingMaterial" class="control-label"></label>
+                <input asp-for="DiamondSetting.DiamondSettingMaterial" class="form-control" />
+                <span asp-validation-for="DiamondSetting.DiamondSettingMaterial" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiamondSetting.DiamondSettingWeight" class="control-label"></label>
+                <input asp-for="DiamondSetting.DiamondSettingWeight" class="form-control" />
+                <span asp-validation-for="DiamondSetting.DiamondSettingWeight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiamondSetting.DiamondSettingSize" class="control-label"></label>
+                <input asp-for="DiamondSetting.DiamondSettingSize" class="form-control" />
+                <span asp-validation-for="DiamondSetting.DiamondSettingSize" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

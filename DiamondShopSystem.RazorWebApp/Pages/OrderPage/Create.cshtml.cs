@@ -1,28 +1,27 @@
-﻿using DiamondShopSystem.Business.Business.Interfaces;
-using DiamondShopSystem.Data.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-
+using DiamondShopSystem.DataAccess.Models;
+using DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext;
 
 namespace DiamondShopSystem.RazorWebApp.Pages.OrderPage
 {
     public class CreateModel : PageModel
-    { 
-          private readonly IOrderBusiness _orderBusiness;
-          private readonly ICustomerBusiness _customerBusiness;
+    {
+        private readonly DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext.cs _context;
 
-        public CreateModel(IOrderBusiness orderBusiness, ICustomerBusiness customerBusiness)
+        public CreateModel(DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext.cs context)
         {
-            _orderBusiness = orderBusiness;
-            _customerBusiness = customerBusiness;
+            _context = context;
         }
 
-
-
-        public async Task<IActionResult> OnGetAsync()
+        public IActionResult OnGet()
         {
-            ViewData["CustomerId"] = new SelectList((await _customerBusiness.GetAllCustomerAsync()).Data as List<Customer>, "CustomerId", "CustomerId");
+        ViewData["CustomerId"] = new SelectList(_context.Customer, "CustomerId", "Address");
             return Page();
         }
 
@@ -37,7 +36,8 @@ namespace DiamondShopSystem.RazorWebApp.Pages.OrderPage
                 return Page();
             }
 
-            await _orderBusiness.CreateOrder(Order);
+            _context.Order.Add(Order);
+            await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }
