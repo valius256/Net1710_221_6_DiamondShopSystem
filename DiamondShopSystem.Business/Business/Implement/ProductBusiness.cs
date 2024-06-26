@@ -1,6 +1,7 @@
 ﻿using DiamondShopSystem.Business.Business.Interfaces;
 using DiamondShopSystem.Business.ViewModels;
 using DiamondShopSystem.Common;
+using DiamondShopSystem.Common.Dtos;
 using DiamondShopSystem.Data.Models;
 using DiamondShopSystem.DataAccess;
 
@@ -86,6 +87,19 @@ namespace DiamondShopSystem.Business.Business.Implement
             else
             {
                 return new BusinessResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, product);
+            }
+        }
+
+        public async Task<IBusinessResult> GetProductQueried(QueryProductDto queryProductDto)
+        {
+            var products = await _unitOfWork.ProductRepository.GetQueriedProducts(queryProductDto);
+            if (products is null)
+            {
+                return new BusinessResult(Const.WARNING_NO_DATA_CODE, Const.WARNING_NO_DATA__MSG);
+            }
+            else
+            {
+                return new BusinessResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, products);
             }
         }
 

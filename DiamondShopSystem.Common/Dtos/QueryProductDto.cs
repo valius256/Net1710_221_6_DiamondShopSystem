@@ -1,5 +1,5 @@
 ﻿
-namespace DiamondShopSystem.Business.Dtos
+namespace DiamondShopSystem.Common.Dtos
 {
     public class QueryProductDto
     {
@@ -10,8 +10,8 @@ namespace DiamondShopSystem.Business.Dtos
 
         public string Description { get; set; } = string.Empty;
 
-        public decimal LowerPrice { get; set; }
-        public decimal UpperPrice { get; set; }
+        public decimal? LowerPrice { get; set; }
+        public decimal? UpperPrice { get; set; }
 
         public string Status { get; set; } = string.Empty;
     }

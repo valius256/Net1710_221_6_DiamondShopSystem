@@ -1,4 +1,5 @@
 ﻿using DiamondShopSystem.Business.ViewModels;
+using DiamondShopSystem.Common.Dtos;
 using DiamondShopSystem.Data.Models;
 
 namespace DiamondShopSystem.Business.Business.Interfaces
@@ -6,6 +7,7 @@ namespace DiamondShopSystem.Business.Business.Interfaces
     public interface IProductBusiness
     {
         Task<IBusinessResult> GetAllProducts();
+        Task<IBusinessResult> GetProductQueried(QueryProductDto queryProductDto);
         Task<IBusinessResult> GetByIdAsync(int id);
         Task<IBusinessResult> CreateProduct(Product product);
         Task<IBusinessResult> UpdateProduct(Product product);
