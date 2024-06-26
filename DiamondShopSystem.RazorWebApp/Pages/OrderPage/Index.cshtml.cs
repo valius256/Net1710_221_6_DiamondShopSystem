@@ -3,7 +3,6 @@ using DiamondShopSystem.Business.Dtos;
 using DiamondShopSystem.DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 
 namespace DiamondShopSystem.RazorWebApp.Pages.OrderPage
 {
@@ -56,9 +55,35 @@ namespace DiamondShopSystem.RazorWebApp.Pages.OrderPage
                         .ToList();
                 }
 
+                // Filter by OrderDate range
+                if (QueryOrderDto.OrderDateFrom.HasValue && QueryOrderDto.OrderDateTo.HasValue)
+                {
+                    orders = orders
+                        .Where(o => o.OrderDate >= QueryOrderDto.OrderDateFrom.Value && o.OrderDate <= QueryOrderDto.OrderDateTo.Value)
+                        .ToList();
+                }
+                else if (QueryOrderDto.OrderDateFrom.HasValue)
+                {
+                    orders = orders
+                        .Where(o => o.OrderDate >= QueryOrderDto.OrderDateFrom.Value)
+                        .ToList();
+                }
+                else if (QueryOrderDto.OrderDateTo.HasValue)
+                {
+                    orders = orders
+                        .Where(o => o.OrderDate <= QueryOrderDto.OrderDateTo.Value)
+                        .ToList();
+                }
+                if (QueryOrderDto.CustomerId.HasValue)
+                {
+                    orders = orders
+                        .Where(o => o.OrderId == QueryOrderDto.CustomerId.Value)
+                        .ToList();
+                }
             }
 
             Order = orders;
         }
+
     }
 }
