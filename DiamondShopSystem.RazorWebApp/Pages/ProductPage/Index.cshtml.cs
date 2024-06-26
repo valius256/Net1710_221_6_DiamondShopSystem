@@ -1,7 +1,5 @@
 ﻿using DiamondShopSystem.Business.Business.Interfaces;
-using DiamondShopSystem.Business.Dtos;
-using DiamondShopSystem.DataAccess.Models;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using DiamondShopSystem.Common.Dtos;
 
 namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
 {
@@ -26,9 +24,14 @@ namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
 
         public QueryProductDto queryProductDto { get; set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(QueryProductDto queryProductDto)
         {
-            Product = (await _productBusiness.GetAllProducts()).Data as List<Product> ?? new List<Product>();
+            Product = (await _productBusiness.GetProductQueried(queryProductDto)).Data as List<Product> ?? new List<Product>();
+        }
+
+        public void OnPost()
+        {
+            RedirectToAction("Index", queryProductDto);
         }
     }
 }
