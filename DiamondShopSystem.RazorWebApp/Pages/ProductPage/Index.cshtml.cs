@@ -1,5 +1,7 @@
 ﻿using DiamondShopSystem.Business.Business.Interfaces;
 using DiamondShopSystem.Common.Dtos;
+using DiamondShopSystem.DataAccess.Models;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
 {
@@ -22,6 +24,9 @@ namespace DiamondShopSystem.RazorWebApp.Pages.ProductPage
         public IList<DiamondSetting> DiamondSettings { get; set; } = default!;
         public IList<MainDiamond> MainDiamonds { get; set; } = default!;
 
+        public int PageNumber { get; set; } = 1;
+        public int PageSize { get; set; } = 0;
+        public int TotalPage { get; set; } = 1;
         public QueryProductDto queryProductDto { get; set; } = default!;
 
         public async Task OnGetAsync(QueryProductDto queryProductDto)

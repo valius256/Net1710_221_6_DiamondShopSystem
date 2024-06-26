@@ -141,27 +141,12 @@
     </tbody>
 </table>
 <div class="container mt-5">
-    <h2>Filter Products</h2>
     <form id="queryForm" class="d-flex flex-wrap gap-2">
-        <div class="form-group ">
-            <label asp-for="queryProductDto.ProductName" class="control-label">Name</label>
-            <input asp-for="queryProductDto.ProductName" class="form-control" />
+        <div class="form-group col-12">
+            <button type="submit" class="btn btn-primary">Filter</button>
         </div>
         <div class="form-group ">
-            <label asp-for="queryProductDto.UpperPrice" class="control-label">Upper Price</label>
-            <input asp-for="queryProductDto.UpperPrice" class="form-control" />
-        </div>
-        <div class="form-group ">
-            <label asp-for="queryProductDto.LowerPrice" class="control-label">Lower Price</label>
-            <input asp-for="queryProductDto.LowerPrice" class="form-control" />
-        </div>
-        <div class="form-group ">
-            <label asp-for="queryProductDto.Description" class="control-label">Description</label>
-            <input asp-for="queryProductDto.Description" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label asp-for="queryProductDto.Status" class="control-label">Status</label>
-            <input asp-for="queryProductDto.Status" class="form-control" />
+            <input asp-for="PageNumber" class="form-control" />
         </div>
         <div class="form-group col-12">
             <button type="submit" class="btn btn-primary">Filter</button>
