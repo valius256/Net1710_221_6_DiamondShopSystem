@@ -1,6 +1,6 @@
 ﻿using DiamondShopSystem.Business.ViewModels;
 using DiamondShopSystem.Common.Dtos;
-using DiamondShopSystem.Data.Models;
+using DiamondShopSystem.DataAccess.Models;
 
 namespace DiamondShopSystem.Business.Business.Interfaces
 {
