@@ -1,4 +1,9 @@
+<<<<<<< HEAD:DiamondShopSystem.Business/Dtos/QueryProductDto.cs
 ﻿namespace DiamondShopSystem.Business.Dtos
+=======
+﻿
+namespace DiamondShopSystem.Common.Dtos
+>>>>>>> hung_lesson_19_6_2024:DiamondShopSystem.Common/Dtos/QueryProductDto.cs
 {
     public class QueryProductDto
     {
@@ -8,8 +13,8 @@
 
         public string Description { get; set; } = string.Empty;
 
-        public decimal LowerPrice { get; set; }
-        public decimal UpperPrice { get; set; }
+        public decimal? LowerPrice { get; set; }
+        public decimal? UpperPrice { get; set; }
 
         public string Status { get; set; } = string.Empty;
 
