@@ -1,8 +1,7 @@
 ﻿using DiamondShopSystem.Business;
 using DiamondShopSystem.DataAccess.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext;
+using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
