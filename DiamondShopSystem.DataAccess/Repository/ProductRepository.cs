@@ -2,6 +2,7 @@
 using DiamondShopSystem.DataAccess.Base;
 using DiamondShopSystem.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace DiamondShopSystem.DataAccess.Repository
 {
@@ -16,9 +17,12 @@ namespace DiamondShopSystem.DataAccess.Repository
                 .ToListAsync();
         }
 
-        public async Task<List<Product>> GetQueriedProducts(QueryProductDto queryProductDto)
+        public async Task<PaginatedResult<Product>> GetQueriedProducts(int pageNumber, int pageSize, QueryProductDto queryProductDto)
         {
             var query =  _context.Products
+                .Include(p => p.MainDiamond)
+                .Include(p => p.SideStone)
+                .Include(p => p.DiamondSetting)
                 .AsQueryable();
 
             if (queryProductDto.ProductName != null)
@@ -27,7 +31,7 @@ namespace DiamondShopSystem.DataAccess.Repository
             }
             if (queryProductDto.Status != null)
             {
-                query = query.Where(p => p.Status != queryProductDto.Status);
+                query = query.Where(p => p.Status == queryProductDto.Status);
             }
             if (queryProductDto.UpperPrice.HasValue)
             {
@@ -42,11 +46,27 @@ namespace DiamondShopSystem.DataAccess.Repository
                 query = query.Where(p => p.Description != null && p.Description.Contains(queryProductDto.Description));
             }
 
-            return await query
-                 .Include(p => p.MainDiamond)
-                 .Include(p => p.SideStone)
-                 .Include(p => p.DiamondSetting)
-                .ToListAsync();
+            var paginatedResult = await query
+               .Skip((pageNumber - 1) * pageSize)
+               .Take(pageSize)
+               .ToListAsync();
+
+            // Count the total number of records
+            int totalRecords = await query.CountAsync();
+
+            // Calculate the total number of pages
+            int totalPages = (int)Math.Ceiling(totalRecords / (double)pageSize);
+
+            var result = new PaginatedResult<Product>
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                TotalPages = totalPages,
+                TotalRecords = totalRecords,
+                Results = paginatedResult
+            };
+
+            return result;
         }
 
     }

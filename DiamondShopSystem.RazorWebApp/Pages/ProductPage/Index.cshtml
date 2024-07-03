@@ -12,7 +12,7 @@
 </p>
 <div class="container mt-5">
     <h2>Filter Products</h2>
-    <form id="queryForm" class="d-flex flex-wrap gap-2">
+    <form id="queryForm" class="d-flex flex-wrap gap-2" asp-page-handler="Filter">
         <div class="form-group ">
             <label asp-for="queryProductDto.ProductName" class="control-label">Name</label>
             <input asp-for="queryProductDto.ProductName" class="form-control" />
@@ -48,12 +48,6 @@
                 @Html.DisplayNameFor(model => model.Product[0].Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product[0].CreateAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product[0].UpdateAt)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Product[0].Price)
             </th>
             <th>
@@ -61,12 +55,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Product[0].Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product[0].StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product[0].EndDate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Product[0].Terms)
@@ -96,12 +84,6 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreateAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdateAt)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
@@ -109,12 +91,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Terms)
@@ -126,7 +102,7 @@
                 @Html.DisplayFor(modelItem => item.DiamondSetting.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MainDiamond.MainDiamondType)
+                @Html.DisplayFor(modelItem => item.MainDiamond.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SideStone.Name)
@@ -141,15 +117,23 @@
     </tbody>
 </table>
 <div class="container mt-5">
-    <form id="queryForm" class="d-flex flex-wrap gap-2">
-        <div class="form-group col-12">
-            <button type="submit" class="btn btn-primary">Filter</button>
+    <div class="d-flex flex-wrap justify-content-center gap-2">
+        <div class="form-group">
+            <form method="post" asp-page-handler="PrevPage">
+                <button type="submit" class="btn btn-primary">Previous Page</button>
+            </form>
         </div>
         <div class="form-group ">
-            <input asp-for="PageNumber" class="form-control" />
+            @* <input asp-for="PageNumber" class="form-control"/> *@
+            @Model.PageNumber
         </div>
-        <div class="form-group col-12">
-            <button type="submit" class="btn btn-primary">Filter</button>
+        <div>
+            / @Model.TotalPage
         </div>
-    </form>
+        <div class="form-group">
+            <form method="post" asp-page-handler="NextPage">
+                <button type="submit" class="btn btn-primary">Next Page</button>
+            </form>
+        </div>
+    </div>
 </div>
