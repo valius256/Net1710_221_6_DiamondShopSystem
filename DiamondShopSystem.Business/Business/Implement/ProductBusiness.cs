@@ -90,9 +90,9 @@ namespace DiamondShopSystem.Business.Business.Implement
             }
         }
 
-        public async Task<IBusinessResult> GetProductQueried(QueryProductDto queryProductDto)
+        public async Task<IBusinessResult> GetProductQueried(int pageNumber, int pageSize, QueryProductDto queryProductDto)
         {
-            var products = await _unitOfWork.ProductRepository.GetQueriedProducts(queryProductDto);
+            var products = await _unitOfWork.ProductRepository.GetQueriedProducts(pageNumber, pageSize, queryProductDto);
             if (products is null)
             {
                 return new BusinessResult(Const.WARNING_NO_DATA_CODE, Const.WARNING_NO_DATA__MSG);
