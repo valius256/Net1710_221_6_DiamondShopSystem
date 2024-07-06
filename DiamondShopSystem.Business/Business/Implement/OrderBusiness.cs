@@ -103,6 +103,7 @@ namespace DiamondShopSystem.Business.Business.Implement
             try
             {
                 int result = await _unitOfWork.OrderRepository.UpdateAsync(order);
+
                 if (result > 0)
                 {
                     return new BusinessResult(Const.SUCCESS_UPDATE_CODE, Const.SUCCESS_UPDATE_MSG);
@@ -156,6 +157,20 @@ namespace DiamondShopSystem.Business.Business.Implement
             else
             {
                 return new BusinessResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, orders);
+            }
+        }
+
+        public async Task<IBusinessResult> OrderExist(int id)
+        {
+            var ordersList = await _unitOfWork.OrderRepository.GetAllAsync();
+            var order = ordersList.FirstOrDefault(ld => ld.OrderId == id);
+            if (order is null)
+            {
+                return new BusinessResult(Const.WARNING_NO_DATA_CODE, Const.WARNING_NO_DATA__MSG);
+            }
+            else
+            {
+                return new BusinessResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, order);
             }
         }
     }

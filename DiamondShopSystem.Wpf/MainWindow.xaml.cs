@@ -1,15 +1,7 @@
 ﻿using DiamondShopSystem.Wpf.UI;
-using Net1710_221_6_DiamondShopSystem.WpfApp.UI;
-using System.Text;
+using DiamondShopSystem.Wpf.UI.Order;
+using DiamondShopSystem.Wpf.UI.OrderDetails;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DiamondShopSystem.Wpf
 {
@@ -29,7 +21,7 @@ namespace DiamondShopSystem.Wpf
             p.Show();
         }
 
-            private async void Open_wOrder_Click(object sender, RoutedEventArgs e)
+        private async void Open_wOrder_Click(object sender, RoutedEventArgs e)
         {
             var order = new wOrder();
             order.Owner = this;
@@ -59,5 +51,13 @@ namespace DiamondShopSystem.Wpf
             sideStone.Owner = this;
             sideStone.Show();
         }
+
+        private async void Open_wOrderDetail_Click(object sender, RoutedEventArgs e)
+        {
+            var sideStone = new wOrderDetail();
+            sideStone.Owner = this;
+            sideStone.Show();
+        }
+
     }
 }
