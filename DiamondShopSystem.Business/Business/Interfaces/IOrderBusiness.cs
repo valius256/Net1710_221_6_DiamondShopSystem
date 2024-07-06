@@ -13,5 +13,6 @@ namespace DiamondShopSystem.Business.Business.Interfaces
         Task<IBusinessResult> DeleteOrder(int id);
         Task<IBusinessResult> GetQueriedOrder(QueryOrderDto queryOrderDto);
         Task<IBusinessResult> Save(Order order);
+        Task<IBusinessResult> OrderExist(int id);
     }
 }
