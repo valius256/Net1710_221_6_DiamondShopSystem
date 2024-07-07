@@ -5,74 +5,109 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DiamondShopSystem.Wpf.UI"
         mc:Ignorable="d"
-        Title="wProduct" Height="450" Width="800">
+        Title="wProduct" Height="565" Width="859">
     <Grid>
-        <StackPanel Orientation="Vertical">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="2*"/>
-                    </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Margin="0,22,0,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
 
-                    <GroupBox Name="groupBoxProductForm" 
+                <GroupBox Name="groupBoxProductForm" 
                   Header="Product Details" 
                   Grid.Row="1">
-                        <Grid Name="grdProductForm" Height="100">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="2*"/>
-                                <RowDefinition Height="2*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="80"/>
-                                <ColumnDefinition Width="200"/>
-                                <ColumnDefinition Width="80"/>
-                                <ColumnDefinition Width="200"/>
-                                <ColumnDefinition Width="80"/>
-                                <ColumnDefinition Width="200"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Grid.Row="0" Content="Name" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
-                            <TextBox Grid.Column="1" Grid.Row="0" x:Name="txtProductName" Height="25" Text="{Binding ProductName, Mode=TwoWay}"  Margin="5"  Width="180" HorizontalAlignment="Left"/>
-                            <Label Grid.Column="2" Grid.Row="0" Content="Description" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
-                            <TextBox Grid.Row="0" Grid.Column="3" x:Name="txtProductDescription" Height="25" Text="{Binding Description, Mode=TwoWay}"  Margin="5"  Width="180" HorizontalAlignment="Left"/>
-                            <Label Grid.Column="4" Grid.Row="0" Content="Price" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
-                            <TextBox Grid.Column="5" Grid.Row="0" x:Name="txtPrice" Height="25" Text="{Binding Price, Mode=TwoWay}"  Margin="5"  Width="180" HorizontalAlignment="Left"/>
-                            <Label Grid.Column="0" Grid.Row="1" Content="Warranty" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
-                            <TextBox Grid.Column="1" Grid.Row="1" x:Name="txtWarranty" Height="25" Text="{Binding Warranty, Mode=TwoWay}"  Margin="5"  Width="180" HorizontalAlignment="Left"/>
-                            <Label Grid.Column="2" Grid.Row="1" Content="Term" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
-                            <TextBox Grid.Column="3" Grid.Row="1" x:Name="txtTerm" Height="25" Text="{Binding Terms, Mode=TwoWay}"  Margin="5"  Width="180" HorizontalAlignment="Left"/>
-                        </Grid>
-                    </GroupBox>
-                </Grid>
+                    <Grid Name="grdProductForm" Height="180">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="4*"/>
+                            <RowDefinition Height="4*"/>
+                            <RowDefinition Height="4*"/>
+                            <RowDefinition Height="4*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Grid.Row="0" Content="Name" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+                        <TextBox Grid.Column="1" Grid.Row="0" x:Name="txtProductName" Height="25" Text="{Binding ProductName, Mode=TwoWay}"  Margin="5"  Width="180" HorizontalAlignment="Left"/>
+                        <Label Grid.Column="2" Grid.Row="0" Content="Description" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+                        <TextBox Grid.Row="0" Grid.Column="3" x:Name="txtProductDescription" Height="25" Text="{Binding Description, Mode=TwoWay}"  Margin="5"  Width="180" HorizontalAlignment="Left"/>
+                        <Label Grid.Column="4" Grid.Row="0" Content="Price" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+                        <TextBox Grid.Column="5" Grid.Row="0" x:Name="txtPrice" Height="25" Text="{Binding Price, Mode=TwoWay}"  Margin="5"  Width="180" HorizontalAlignment="Left"/>
+                        <Label Grid.Column="0" Grid.Row="1" Content="Warranty" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+                        <TextBox Grid.Column="1" Grid.Row="1" x:Name="txtWarranty" Height="25" Text="{Binding Warranty, Mode=TwoWay}"  Margin="5"  Width="180" HorizontalAlignment="Left"/>
+                        <Label Grid.Column="2" Grid.Row="1" Content="Term" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+                        <TextBox Grid.Column="3" Grid.Row="1" x:Name="txtTerm" Height="25" Text="{Binding Terms, Mode=TwoWay}"  Margin="5"  Width="180" HorizontalAlignment="Left"/>
+                        <Label Grid.Column="4" Grid.Row="1" Content="Status" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+                        <TextBox Grid.Column="5" Grid.Row="1" x:Name="txtStatus" Height="25" Text="{Binding Status, Mode=TwoWay}"  Margin="5"  Width="180" HorizontalAlignment="Left"/>
+                        <TextBox Grid.Column="5" Grid.Row="2" x:Name="txtMainDiamond" Height="25" Text="{Binding MainDiamondId, Mode=TwoWay}"  Margin="5"  Width="180" HorizontalAlignment="Left"/>
+                        <Label Grid.Column="0" Grid.Row="2" Content="MainDiamond" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+                        <ComboBox Name="cmbMainDiamond" Grid.Column="1" Margin="5,10,15,10" Grid.Row="2" SelectedValuePath="MainDiamondId">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Name}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Label Grid.Column="2" Grid.Row="2" Content="SideStone" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+                        <ComboBox Name="cmbSideStone" Grid.Column="3" Margin="5,10,15,10" Grid.Row="2" SelectedValuePath="SideStoneId">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Name}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Label Grid.Column="4" Grid.Row="2" Content="DiamondSetting" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+                        <ComboBox Name="cmbDiamondSetting" Grid.Column="5" Margin="5,10,15,10" Grid.Row="2" SelectedValuePath="DiamondSettingId">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Name}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Label Grid.Column="0" Grid.Row="3" Content="SS Amount" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+                        <TextBox Grid.Column="1" Grid.Row="3" x:Name="txtSsAmount" Height="25" Text="{Binding SideStoneId, Mode=TwoWay}"  Margin="5"  Width="180" HorizontalAlignment="Left"/>
+                        <Label Grid.Column="2" Grid.Row="3" Content="Start Date" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+                        <DatePicker Name="dpkStartDate" Grid.Column="3" Grid.Row="3" FirstDayOfWeek="Monday" Margin="5,10,15,10" SelectedDate="{Binding StartDate}"/>
+                        <Label Grid.Column="4" Grid.Row="3" Content="End Date" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+                        <DatePicker Name="dpkEndDate" Grid.Column="5" Grid.Row="3" FirstDayOfWeek="Monday" Margin="5,10,15,10" SelectedDate="{Binding EndDate}"/>
+                    </Grid>
+                </GroupBox>
+            </Grid>
             <StackPanel Height="40" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="ButtonSave" Content="Save" Height="30" Width="80" Click="ButtonSave_Click"/>
                 <Button x:Name="ButtonCancel" Content="Cancel" Height="30" Width="80" Click="ButtonCancel_Click"/>
+                <Button x:Name="ButtonSave" Content="Create" Height="30" Width="80" Click="ButtonSave_Click"/>
             </StackPanel>
             <StackPanel Height="210">
                 <DataGrid x:Name="grdProduct" AutoGenerateColumns="False" ItemsSource="{Binding Product}" CanUserAddRows="False" Height="200" MouseDoubleClick="grdProduct_MouseDouble_Click" SelectionMode="Single" SelectionUnit="FullRow">
                     <DataGrid.Columns>
-
-                        <!--<DataGridTemplateColumn Width="50">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Delete" x:Name="ButtonDelete" CommandParameter="{Binding Path=Id}"
-                                Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource FindAncestor,
-                                        AncestorType=Window}}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>-->
-                        <!--<DataGridTextColumn Header="Code" Binding="{Binding Path=Id}" Visibility="Hidden"/>-->
                         <DataGridTextColumn Header="ProductName" Binding="{Binding ProductName}" Visibility="Visible"/>
-                        <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="300"  IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="50"  IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Warranty" Binding="{Binding Warranty}" Width="120"  IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Term" Binding="{Binding Terms}" Width="120"  IsReadOnly="True"/>
+                        <DataGridTextColumn Header="MainDiamond" Binding="{Binding MainDiamond.Name}" Visibility="Visible"/>
+                        <DataGridTextColumn Header="SideStone" Binding="{Binding SideStone.Name}" Visibility="Visible"/>
+                        <DataGridTextColumn Header="DiamondSetting" Binding="{Binding DiamondSetting.Name}" Visibility="Visible"/>
+                        <DataGridTextColumn Header="SSAmount" Binding="{Binding SideStoneAmount}" Width="30" Visibility="Visible"/>
+                        <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="100"  IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Price" Binding="{Binding Price}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Warranty" Binding="{Binding Warranty}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="StartDate" Binding="{Binding StartDate}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="EndDate" Binding="{Binding EndDate}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Term" Binding="{Binding Terms}"  IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Status" Binding="{Binding Status}"  IsReadOnly="True"/>
                         <DataGridTemplateColumn Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="Delete" x:Name="ButtonDelete" CommandParameter="{Binding Path=Id}"
-                                Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource FindAncestor,
-                                        AncestorType=Window}}"/>
+                                    <Button Content="Delete" x:Name="ButtonDelete" Click="grdProduct_ButtonDelete_Click"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -80,6 +115,8 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
+            <Button x:Name="ButtonClose" Content="Close" Height="30" Width="80" Click="ButtonClose_Click"/>
+
         </StackPanel>
     </Grid>
 </Window>
