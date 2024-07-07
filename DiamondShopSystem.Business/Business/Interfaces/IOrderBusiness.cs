@@ -1,4 +1,5 @@
-﻿using DiamondShopSystem.Business.ViewModels;
+﻿using DiamondShopSystem.Business.Dtos;
+using DiamondShopSystem.Business.ViewModels;
 using DiamondShopSystem.DataAccess.Models;
 
 namespace DiamondShopSystem.Business.Business.Interfaces
@@ -10,6 +11,8 @@ namespace DiamondShopSystem.Business.Business.Interfaces
         Task<IBusinessResult> CreateOrder(Order order);
         Task<IBusinessResult> UpdateOrder(Order order);
         Task<IBusinessResult> DeleteOrder(int id);
+        Task<IBusinessResult> GetQueriedOrder(QueryOrderDto queryOrderDto);
         Task<IBusinessResult> Save(Order order);
+        Task<IBusinessResult> OrderExist(int id);
     }
 }

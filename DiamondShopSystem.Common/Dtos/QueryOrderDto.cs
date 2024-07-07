@@ -4,9 +4,9 @@
     {
         public int? OrderId { get; set; }
 
-        public int CustomerId { get; set; }
+        public int? CustomerId { get; set; }
 
-        public DateTime OrderDate { get; set; }
+        public DateTime? OrderDate { get; set; }
 
         public string OrderStatus { get; set; } = string.Empty;
 
@@ -25,5 +25,10 @@
         public string? Note { get; set; }
 
         public decimal? TotalPrice { get; set; }
+
+        // Additional properties for date range filtering
+        public DateTime? OrderDateFrom { get; set; }
+
+        public DateTime? OrderDateTo { get; set; }
     }
 }

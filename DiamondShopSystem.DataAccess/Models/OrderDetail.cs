@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DiamondShopSystem.DataAccess.Models;
+﻿namespace DiamondShopSystem.DataAccess.Models;
 
 public partial class OrderDetail
 {
