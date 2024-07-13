@@ -4,6 +4,7 @@ using DiamondShopSystem.DataAccess.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace DiamondShopSystem.Wpf.UI
 {
@@ -13,15 +14,28 @@ namespace DiamondShopSystem.Wpf.UI
     public partial class wProduct : Window
     {
         private readonly IProductBusiness _productBusiness;
+        private readonly IMainDiamondBusiness _mainDiamondBusiness;
+        private readonly ISideStoneBusiness _sideStoneBusiness;
+        private readonly IDiamondSettingBusiness _diamondSettingBusiness;
         public Product? Product { get; set; }
         //public List<Product> Products { get; set; }
         public wProduct()
         {
             InitializeComponent();
+            ButtonCancel.Visibility = Visibility.Hidden;
             _productBusiness ??= new ProductBusiness();
+            _mainDiamondBusiness ??= new MainDiamondBusiness();
+            _sideStoneBusiness ??= new SideStoneBusiness();
+            _diamondSettingBusiness ??= new DiamondSettingBusiness();
             LoadProducts();
+            LoadComboBox();
         }
-
+        private async void LoadComboBox()
+        {
+            cmbDiamondSetting.ItemsSource = (await _diamondSettingBusiness.GetAllDiamondSettings()).Data as List<DiamondSetting>;
+            cmbSideStone.ItemsSource = (await _sideStoneBusiness.GetAllSideStones()).Data as List<SideStone>;
+            cmbMainDiamond.ItemsSource = (await _mainDiamondBusiness.GetAllMainDiamonds()).Data as List<MainDiamond>;
+        }
         private async void LoadProducts()
         {
             var result = await _productBusiness.GetAllProducts();
@@ -34,23 +48,29 @@ namespace DiamondShopSystem.Wpf.UI
             {
                 grdProduct.ItemsSource = new List<Product>();
             }
+            
         }
 
 
-        public async Task grdProduct_ButtonDelete_Click(object sender, RoutedEventArgs e)
+        public async void grdProduct_ButtonDelete_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = (Button)sender;
-
-            int productId = int.Parse(btn.CommandParameter.ToString());
-
-            //MessageBox.Show(currencyCode);
-
-            if (MessageBox.Show("Do you want to delete this item?", "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            Button button = sender as Button;
+            if (button != null)
             {
-                var result = await _productBusiness.DeleteProduct(productId);
-                MessageBox.Show($"{result.Message}", "Delete");
-                this.LoadProducts();
-            }           
+                Product product = button.DataContext as Product;
+                if (product != null)
+                {
+                    if (MessageBox.Show("Do you want to delete this item Id " + product.ProductId + "?", "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        var result = await _productBusiness.DeleteProduct(product.ProductId);
+                        MessageBox.Show($"{result.Message}", "Delete");
+                        this.LoadProducts();
+                    }
+                }
+                
+            }
+
+            //MessageBox.Show(currencyCode);         
         }
 
         public void grdProduct_MouseDouble_Click(object sender, RoutedEventArgs e) 
@@ -61,7 +81,12 @@ namespace DiamondShopSystem.Wpf.UI
                 {
                     var selectedProduct = (Product)grdProduct.SelectedItem;
                     Product = selectedProduct;
+                    cmbMainDiamond.SelectedValue = Product.MainDiamondId;
+                    cmbDiamondSetting.SelectedValue = Product.DiamondSettingId;
+                    cmbSideStone.SelectedValue = Product.SideStoneId;
 
+                    ButtonSave.Content = "Save";
+                    ButtonCancel.Visibility = Visibility.Visible;
                     // Update the DataContext of the GroupBox
                     grdProductForm.DataContext = Product;
                 }
@@ -80,20 +105,21 @@ namespace DiamondShopSystem.Wpf.UI
                     {
                         ProductName = txtProductName.Text,
                         Description = txtProductDescription.Text,
-                        Price = int.Parse(txtPrice.Text),
+                        Price = decimal.Parse(txtPrice.Text),
                         Warranty = txtWarranty.Text,
                         Terms = txtTerm.Text,
-                        MainDiamondId = 1,
-                        SideStoneId = 1,
-                        SideStoneAmount = 1,
-                        DiamondSettingId = 1,
-                        StartDate = DateTime.Now,
-                        EndDate = DateTime.Now,
-                        Status = "Available",
+                        MainDiamondId = ((MainDiamond)cmbMainDiamond.SelectedItem).MainDiamondId,
+                        SideStoneId = ((SideStone)cmbSideStone.SelectedItem).SideStoneId,
+                        SideStoneAmount = int.Parse(txtSsAmount.Text),
+                        DiamondSettingId = ((DiamondSetting)cmbDiamondSetting.SelectedItem).DiamondSettingId,
+                        StartDate = dpkStartDate.SelectedDate ?? DateTime.Now,
+                        EndDate = dpkEndDate.SelectedDate ?? DateTime.Now,
+                        Status = txtStatus.Text,
                     };
 
                     var result = await _productBusiness.CreateProduct(product);
-                    MessageBox.Show(result.Message, "Save");
+                    MessageBox.Show(result.Message, "Create");
+                    ClearAllInputs();
                 }
                 else
                 {
@@ -104,21 +130,20 @@ namespace DiamondShopSystem.Wpf.UI
                     product!.Price = decimal.Parse(txtPrice.Text);
                     product!.Warranty = txtWarranty.Text;
                     product!.Terms = txtTerm.Text;
-                    product!.Status = Product?.Status;
-                    product!.MainDiamondId = Product?.MainDiamondId ?? 1;
-                    product!.SideStoneId = Product?.SideStoneId ?? 1;
-                    product!.DiamondSettingId = Product?.DiamondSettingId ?? 1;
+                    product!.Status = txtStatus.Text;
+                    product!.MainDiamondId = (int)cmbMainDiamond.SelectedValue;
+                    product!.SideStoneId = (int)cmbSideStone.SelectedValue;
+                    product!.DiamondSettingId = (int)cmbDiamondSetting.SelectedValue;
+                    product!.StartDate = dpkStartDate.SelectedDate ?? DateTime.Now;
+                    product!.EndDate = dpkEndDate.SelectedDate ?? DateTime.Now;
+                    product!.SideStoneAmount = int.Parse(txtSsAmount.Text);
 
                     var result = await _productBusiness.UpdateProduct(product);
                     MessageBox.Show(result.Message, "Update");
                 }
 
-                txtProductName.Text = string.Empty;
-                txtProductDescription.Text = string.Empty;
-                txtPrice.Text = string.Empty;
-                txtWarranty.Text = string.Empty;
-                txtTerm.Text = string.Empty;
-                this.LoadProducts();
+                //
+                LoadProducts();
             }
             catch (Exception ex)
             {
@@ -126,10 +151,33 @@ namespace DiamondShopSystem.Wpf.UI
             }
 
         }
-
+        private void ClearAllInputs()
+        {
+            txtPrice.Text = "";
+            txtProductDescription.Text = "";
+            txtProductName.Text = "";
+            txtTerm.Text = "";
+            txtWarranty.Text = "";
+            txtSsAmount.Text = "";
+            txtStatus.Text = "";
+            cmbDiamondSetting.SelectedItem = null;
+            cmbMainDiamond.SelectedItem = null;
+            cmbSideStone.SelectedItem = null;
+            dpkEndDate.Text = "";
+            dpkStartDate.Text = "";
+        }
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
             Product = null;
+            ClearAllInputs();
+            LoadComboBox();
+            ButtonSave.Content = "Create";
+            ButtonCancel.Visibility = Visibility.Hidden;
+        }
+
+        private void ButtonClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

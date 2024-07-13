@@ -16,7 +16,14 @@ namespace DiamondShopSystem.DataAccess.Repository
                 .Include(p => p.DiamondSetting)
                 .ToListAsync();
         }
-
+        public async Task<Product?> GetDetailProductByIdAsync(int id)
+        {
+            return await _context.Products
+                .Include(p => p.MainDiamond)
+                .Include(p => p.SideStone)
+                .Include(p => p.DiamondSetting)
+                .FirstOrDefaultAsync(p => p.ProductId == id);
+        }
         public async Task<PaginatedResult<Product>> GetQueriedProducts(int pageNumber, int pageSize, QueryProductDto queryProductDto)
         {
             var query =  _context.Products
