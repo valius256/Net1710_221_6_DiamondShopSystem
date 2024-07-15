@@ -1,35 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DiamondShopSystem.Business.Business.Interfaces;
+using DiamondShopSystem.DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using DiamondShopSystem.DataAccess.Models;
-using DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext;
 
 namespace DiamondShopSystem.RazorWebApp.Pages.OrderDetailPage
 {
     public class CreateModel : PageModel
     {
-        private readonly DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext.cs _context;
-
-        public CreateModel(DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext.cs context)
+        private readonly IOrderDetailBusiness _orderDetailBusiness;
+        private readonly IProductBusiness _productBusiness;
+        public CreateModel(IOrderDetailBusiness orderDetail, IProductBusiness productBusiness)
         {
-            _context = context;
+            _orderDetailBusiness = orderDetail;
+            _productBusiness = productBusiness;
         }
 
-        public IActionResult OnGet()
+
+
+        public async Task<IActionResult> OnGetAsync()
         {
-        ViewData["OrderId"] = new SelectList(_context.Order, "OrderId", "DeliveryStatus");
-        ViewData["ProductId"] = new SelectList(_context.Set<Product>(), "ProductId", "ProductName");
+            var orderList = (await _orderDetailBusiness.GetAllOrderDetail()).Data as List<OrderDetail>;
+            var productList = (await _orderDetailBusiness.GetAllOrderDetail()).Data as List<Product>;
+
+            ViewData["OrderId"] = new SelectList(orderList, "OrderId", "OrderId");
+            ViewData["ProductId"] = new SelectList(productList, "ProductId", "ProductId");
             return Page();
         }
 
         [BindProperty]
         public OrderDetail OrderDetail { get; set; } = default!;
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -37,9 +38,7 @@ namespace DiamondShopSystem.RazorWebApp.Pages.OrderDetailPage
                 return Page();
             }
 
-            _context.OrderDetail.Add(OrderDetail);
-            await _context.SaveChangesAsync();
-
+            await _orderDetailBusiness.CreateOrderDetail(OrderDetail);
             return RedirectToPage("./Index");
         }
     }

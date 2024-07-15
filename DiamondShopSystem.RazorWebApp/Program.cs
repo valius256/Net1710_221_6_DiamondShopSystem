@@ -1,6 +1,5 @@
 ﻿using DiamondShopSystem.Business;
 using DiamondShopSystem.DataAccess.Models;
-using DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext;
 using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 

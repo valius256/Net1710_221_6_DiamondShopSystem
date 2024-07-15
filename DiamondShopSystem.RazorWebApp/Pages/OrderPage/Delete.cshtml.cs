@@ -1,35 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DiamondShopSystem.Business.Business.Interfaces;
+using DiamondShopSystem.DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using DiamondShopSystem.DataAccess.Models;
-using DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext;
 
 namespace DiamondShopSystem.RazorWebApp.Pages.OrderPage
 {
     public class DeleteModel : PageModel
     {
-        private readonly DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext.cs _context;
+        private readonly IOrderBusiness _orderBusiness;
 
-        public DeleteModel(DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext.cs context)
+        public DeleteModel(IOrderBusiness orderBusiness)
         {
-            _context = context;
+            _orderBusiness = orderBusiness;
         }
+
 
         [BindProperty]
         public Order Order { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var order = await _context.Order.FirstOrDefaultAsync(m => m.OrderId == id);
+            var order = await _orderBusiness.GetOrderById(id);
 
             if (order == null)
             {
@@ -37,24 +33,23 @@ namespace DiamondShopSystem.RazorWebApp.Pages.OrderPage
             }
             else
             {
-                Order = order;
+                Order = order.Data as Order;
             }
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var order = await _context.Order.FindAsync(id);
+            var order = await _orderBusiness.GetOrderById(id);
             if (order != null)
             {
-                Order = order;
-                _context.Order.Remove(Order);
-                await _context.SaveChangesAsync();
+                Order = order.Data as Order;
+                await _orderBusiness.DeleteOrder(id);
             }
 
             return RedirectToPage("./Index");

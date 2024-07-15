@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DiamondShopSystem.DataAccess.Models;
+﻿namespace DiamondShopSystem.DataAccess.Models;
 
 public partial class Order
 {
@@ -24,7 +21,6 @@ public partial class Order
     public string? Note { get; set; }
 
     public decimal? TotalPrice { get; set; }
-
     public virtual Customer Customer { get; set; } = null!;
 
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
