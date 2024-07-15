@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DiamondShopSystem.DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using DiamondShopSystem.DataAccess.Models;
-using DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext;
 
 namespace DiamondShopSystem.RazorWebApp.Pages.OrderDetailPage
 {
     public class EditModel : PageModel
     {
-        private readonly DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext.cs _context;
+        private readonly Net1710_221_6_DiamondShopSystemContext _context;
 
-        public EditModel(DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext.cs context)
+        public EditModel(Net1710_221_6_DiamondShopSystemContext context)
         {
             _context = context;
         }
@@ -30,14 +25,14 @@ namespace DiamondShopSystem.RazorWebApp.Pages.OrderDetailPage
                 return NotFound();
             }
 
-            var orderdetail =  await _context.OrderDetail.FirstOrDefaultAsync(m => m.OrderDetailId == id);
+            var orderdetail = await _context.OrderDetails.FirstOrDefaultAsync(m => m.OrderDetailId == id);
             if (orderdetail == null)
             {
                 return NotFound();
             }
             OrderDetail = orderdetail;
-           ViewData["OrderId"] = new SelectList(_context.Order, "OrderId", "DeliveryStatus");
-           ViewData["ProductId"] = new SelectList(_context.Set<Product>(), "ProductId", "ProductName");
+            ViewData["OrderId"] = new SelectList(_context.Set<Order>(), "OrderId", "OrderId");
+            ViewData["ProductId"] = new SelectList(_context.Set<Product>(), "ProductId", "ProductId");
             return Page();
         }
 
@@ -73,7 +68,7 @@ namespace DiamondShopSystem.RazorWebApp.Pages.OrderDetailPage
 
         private bool OrderDetailExists(int id)
         {
-            return _context.OrderDetail.Any(e => e.OrderDetailId == id);
+            return _context.OrderDetails.Any(e => e.OrderDetailId == id);
         }
     }
 }

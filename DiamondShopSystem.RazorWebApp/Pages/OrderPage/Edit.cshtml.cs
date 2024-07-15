@@ -1,59 +1,68 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DiamondShopSystem.Business.Business.Interfaces;
+using DiamondShopSystem.DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using DiamondShopSystem.DataAccess.Models;
-using DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext;
 
 namespace DiamondShopSystem.RazorWebApp.Pages.OrderPage
 {
     public class EditModel : PageModel
     {
-        private readonly DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext.cs _context;
-
-        public EditModel(DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext.cs context)
+        private readonly IOrderBusiness _orderBusiness;
+        private readonly ICustomerBusiness _customerBusiness;
+        public EditModel(IOrderBusiness orderBusiness, ICustomerBusiness customerBusiness)
         {
-            _context = context;
+            _orderBusiness = orderBusiness;
+            _customerBusiness = customerBusiness;
         }
+
+
 
         [BindProperty]
         public Order Order { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
 
-            var order =  await _context.Order.FirstOrDefaultAsync(m => m.OrderId == id);
+            var orderResult = await _orderBusiness.GetOrderById(id);
+            var order = orderResult.Data as Order;
+
             if (order == null)
             {
                 return NotFound();
             }
+
             Order = order;
-           ViewData["CustomerId"] = new SelectList(_context.Customer, "CustomerId", "Address");
+
+            var customerResult = await _customerBusiness.GetCustomerByIdAsync(order.CustomerId);
+            var customer = customerResult.Data as Customer;
+
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            ViewData["CustomerId"] = new SelectList(new List<Customer> { customer }, "CustomerId", "CustomerId");
+
             return Page();
         }
+
+
+
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            _context.Attach(Order).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _orderBusiness.UpdateOrder(Order);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -72,7 +81,8 @@ namespace DiamondShopSystem.RazorWebApp.Pages.OrderPage
 
         private bool OrderExists(int id)
         {
-            return _context.Order.Any(e => e.OrderId == id);
+            var rs = _orderBusiness.GetOrderById(id).Result as Order;
+            return rs != null;
         }
     }
 }

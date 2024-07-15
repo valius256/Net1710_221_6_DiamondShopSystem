@@ -1,27 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DiamondShopSystem.Business.Business.Interfaces;
+using DiamondShopSystem.DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using DiamondShopSystem.DataAccess.Models;
-using DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext;
+
 
 namespace DiamondShopSystem.RazorWebApp.Pages.OrderPage
 {
     public class CreateModel : PageModel
     {
-        private readonly DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext.cs _context;
+        private readonly IOrderBusiness _orderBusiness;
+        private readonly ICustomerBusiness _customerBusiness;
 
-        public CreateModel(DiamondShopSystem.DataAccess.Models.Net1710_221_6_DiamondShopSystemContext.cs context)
+        public CreateModel(IOrderBusiness orderBusiness, ICustomerBusiness customerBusiness)
         {
-            _context = context;
+            _orderBusiness = orderBusiness;
+            _customerBusiness = customerBusiness;
         }
 
-        public IActionResult OnGet()
+
+
+        public async Task<IActionResult> OnGetAsync()
         {
-        ViewData["CustomerId"] = new SelectList(_context.Customer, "CustomerId", "Address");
+            ViewData["CustomerId"] = new SelectList((await _customerBusiness.GetAllCustomerAsync()).Data as List<Customer>, "CustomerId", "CustomerId");
             return Page();
         }
 
@@ -31,13 +32,8 @@ namespace DiamondShopSystem.RazorWebApp.Pages.OrderPage
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
 
-            _context.Order.Add(Order);
-            await _context.SaveChangesAsync();
+            await _orderBusiness.CreateOrder(Order);
 
             return RedirectToPage("./Index");
         }
