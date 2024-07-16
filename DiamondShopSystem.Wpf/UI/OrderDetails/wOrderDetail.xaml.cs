@@ -148,6 +148,18 @@ namespace DiamondShopSystem.Wpf.UI.OrderDetails
             }
         }
 
+        private async void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (grdOrderDetails.SelectedItem is DiamondShopSystem.DataAccess.Models.OrderDetail selectedOrderDetail)
+            {
+                var result = await _orderDetailBusiness.DeleteOrderDetail(selectedOrderDetail.OrderDetailId);
+                MessageBox.Show(result.Message, "Delete");
+
+                // Refresh the DataGrid
+                LoadOrderDetails();
+            }
+        }
+
         private void txtDiscount_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
         }

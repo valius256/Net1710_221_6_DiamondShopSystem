@@ -7,10 +7,11 @@
         mc:Ignorable="d"
         Title="wOrderDetail" Height="1500" Width="900">
     <Grid>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Width="800" Margin="10">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Width="890" Margin="10,10,0,10">
             <GroupBox Header="Order Detail Information" Margin="10" Height="297">
                 <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -50,11 +51,11 @@
 
                     <!-- Discount -->
                     <Label Grid.Row="6" Grid.Column="0" Content="Discount:" VerticalAlignment="Top" Margin="0,7,0,0"/>
-                    <TextBox Grid.Row="6" Grid.Column="1" x:Name="txtDiscount" Text="{Binding Path=Discount, Mode=TwoWay}" VerticalAlignment="Top" Margin="5,15,5,0" TextChanged="txtDiscount_TextChanged"/>
+                    <TextBox Grid.Row="6" Grid.Column="1" x:Name="txtDiscount" Text="{Binding Path=Discount, Mode=TwoWay}" VerticalAlignment="Top" Margin="5,15,5,0"/>
 
                     <!-- Notes -->
-                    <Label Grid.Row="7" Grid.Column="0" Content="Notes:" VerticalAlignment="Top" Margin="0,44,0,0"/>
-                    <TextBox Grid.Row="7" Grid.Column="1" x:Name="txtOrderDetailNotes" Text="{Binding Path=OrderDetailNote, Mode=TwoWay}" VerticalAlignment="Top" Margin="5,48,5,0"/>
+                    <Label Grid.Row="7" Grid.Column="0" Content="Notes:" VerticalAlignment="Top" Margin="0,7,0,0"/>
+                    <TextBox Grid.Row="7" Grid.Column="1" x:Name="txtOrderDetailNotes" Text="{Binding Path=OrderDetailNote, Mode=TwoWay}" VerticalAlignment="Top" Margin="5,15,5,0"/>
                 </Grid>
             </GroupBox>
 
@@ -65,22 +66,25 @@
             </StackPanel>
 
             <!-- ScrollViewer for DataGrid -->
-            <GroupBox Header="Order Details" Margin="10">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <DataGrid x:Name="grdOrderDetails" AutoGenerateColumns="False" ItemsSource="{Binding OrderDetails}" CanUserAddRows="True" CanUserDeleteRows="True" Margin="10" Width="758"
-                              MouseDoubleClick="grdOrderDetails_MouseDoubleClick">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Order Detail ID" Binding="{Binding OrderDetailId}" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Product ID" Binding="{Binding ProductId}" Width="100" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="100" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" Width="100" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Fee" Binding="{Binding Fee}" Width="100" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Discount" Binding="{Binding Discount}" Width="100" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Order Detail Note" Binding="{Binding OrderDetailNote}" Width="130" IsReadOnly="True"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </ScrollViewer>
-            </GroupBox>
+            <DataGrid x:Name="grdOrderDetails" AutoGenerateColumns="False" ItemsSource="{Binding OrderDetails}" CanUserAddRows="True" CanUserDeleteRows="True" Margin="10" Width="758"
+          MouseDoubleClick="grdOrderDetails_MouseDoubleClick">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Order Detail ID" Binding="{Binding OrderDetailId}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Product ID" Binding="{Binding ProductId}" Width="100" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="100" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" Width="100" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Fee" Binding="{Binding Fee}" Width="100" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Discount" Binding="{Binding Discount}" Width="100" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Order Detail Note" Binding="{Binding OrderDetailNote}" Width="130" IsReadOnly="True"/>
+                    <DataGridTemplateColumn Header="Actions" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Delete" Click="DeleteButton_Click"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         </StackPanel>
     </Grid>
 </Window>
