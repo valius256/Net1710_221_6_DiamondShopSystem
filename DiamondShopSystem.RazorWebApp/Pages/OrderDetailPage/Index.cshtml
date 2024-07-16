@@ -2,10 +2,10 @@
 @model DiamondShopSystem.RazorWebApp.Pages.OrderDetailPage.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Order Details Index";
 }
 
-<h1>Index</h1>
+<h1>Order Details</h1>
 <p>
     <a asp-page="Create">Create New</a>
 </p>
@@ -25,7 +25,7 @@
         </div>
         <div class="form-group">
             <label asp-for="QueryOrderDetailDto.ProductId" class="control-label">Product Id</label>
-            <input asp-for="QueryOrderDetailDto.ProductId" class="form-control" type="text" />
+            <input asp-for="QueryOrderDetailDto.ProductId" class="form-control" type="number" />
         </div>
         <div class="form-group">
             <label asp-for="QueryOrderDetailDto.OrderDetailNote" class="control-label">Order Detail Note</label>
@@ -33,7 +33,7 @@
         </div>
         <div class="form-group">
             <label asp-for="QueryOrderDetailDto.Fee" class="control-label">Fee</label>
-            <input asp-for="QueryOrderDetailDto.Fee" class="form-control" type="text" />
+            <input asp-for="QueryOrderDetailDto.Fee" class="form-control" type="number" step="0.01" />
         </div>
         <div class="form-group">
             <input type="submit" value="Filter" class="btn btn-primary" />
@@ -41,77 +41,36 @@
     </form>
 </div>
 
-
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDetail[0].OrderDetailId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDetail[0].OrderId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDetail[0].ProductId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDetail[0].Quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDetail[0].Amount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDetail[0].Fee)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDetail[0].CreateAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDetail[0].UpdateAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDetail[0].Discount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDetail[0].OrderDetailNote)
-            </th>
+            <th>@Html.DisplayNameFor(model => model.OrderDetails[0].OrderDetailId)</th>
+            <th>@Html.DisplayNameFor(model => model.OrderDetails[0].OrderId)</th>
+            <th>@Html.DisplayNameFor(model => model.OrderDetails[0].ProductId)</th>
+            <th>@Html.DisplayNameFor(model => model.OrderDetails[0].Quantity)</th>
+            <th>@Html.DisplayNameFor(model => model.OrderDetails[0].Amount)</th>
+            <th>@Html.DisplayNameFor(model => model.OrderDetails[0].Fee)</th>
+            <th>@Html.DisplayNameFor(model => model.OrderDetails[0].CreateAt)</th>
+            <th>@Html.DisplayNameFor(model => model.OrderDetails[0].UpdateAt)</th>
+            <th>@Html.DisplayNameFor(model => model.OrderDetails[0].Discount)</th>
+            <th>@Html.DisplayNameFor(model => model.OrderDetails[0].OrderDetailNote)</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.OrderDetail)
+        @foreach (var item in Model.OrderDetails)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OrderDetailId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OrderId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Amount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Fee)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreateAt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UpdateAt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Discount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OrderDetailNote)
-                </td>
+                <td>@Html.DisplayFor(modelItem => item.OrderDetailId)</td>
+                <td>@Html.DisplayFor(modelItem => item.OrderId)</td>
+                <td>@Html.DisplayFor(modelItem => item.ProductId)</td>
+                <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                <td>@Html.DisplayFor(modelItem => item.Fee)</td>
+                <td>@Html.DisplayFor(modelItem => item.CreateAt)</td>
+                <td>@Html.DisplayFor(modelItem => item.UpdateAt)</td>
+                <td>@Html.DisplayFor(modelItem => item.Discount)</td>
+                <td>@Html.DisplayFor(modelItem => item.OrderDetailNote)</td>
                 <td>
                     <a asp-page="./Edit" asp-route-id="@item.OrderDetailId">Edit</a> |
                     <a asp-page="./Details" asp-route-id="@item.OrderDetailId">Details</a> |
@@ -121,3 +80,25 @@
         }
     </tbody>
 </table>
+
+<div class="container mt-5">
+    <div class="d-flex flex-wrap justify-content-center gap-2">
+        <div class="form-group">
+            <form method="post" asp-page-handler="PrevPage">
+                <button type="submit" class="btn btn-primary">Previous Page</button>
+            </form>
+        </div>
+        <div class="form-group ">
+            @* <input asp-for="PageNumber" class="form-control"/> *@
+            @Model.PageNumber
+        </div>
+        <div>
+            / @Model.TotalPage
+        </div>
+        <div class="form-group">
+            <form method="post" asp-page-handler="NextPage">
+                <button type="submit" class="btn btn-primary">Next Page</button>
+            </form>
+        </div>
+    </div>
+</div>

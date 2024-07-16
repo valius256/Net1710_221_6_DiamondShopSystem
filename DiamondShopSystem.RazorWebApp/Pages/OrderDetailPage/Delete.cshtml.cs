@@ -1,4 +1,4 @@
-﻿using DiamondShopSystem.Business.Business.Implement;
+﻿using DiamondShopSystem.Business.Business.Interfaces;
 using DiamondShopSystem.DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -7,9 +7,9 @@ namespace DiamondShopSystem.RazorWebApp.Pages.OrderDetailPage
 {
     public class DeleteModel : PageModel
     {
-        private readonly OrderDetailBusiness _orderDetailBusiness;
+        private readonly IOrderDetailBusiness _orderDetailBusiness;
 
-        public DeleteModel(OrderDetailBusiness orderDetailBusiness)
+        public DeleteModel(IOrderDetailBusiness orderDetailBusiness)
         {
             _orderDetailBusiness = orderDetailBusiness;
         }
@@ -19,31 +19,33 @@ namespace DiamondShopSystem.RazorWebApp.Pages.OrderDetailPage
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var orderdetail = await _orderDetailBusiness.GetOrderDetailById(id) as OrderDetail;
+            var orderdetail = await _orderDetailBusiness.GetOrderDetailById(id);
+            var orderDetailModel = (orderdetail.Data as OrderDetail);
 
-            if (orderdetail == null)
+            if (orderDetailModel == null)
             {
                 return NotFound();
             }
             else
             {
-                OrderDetail = orderdetail;
+                OrderDetail = orderDetailModel;
             }
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            //if (id == null)
+            //{
+            //    return NotFound();
+            //}
 
-            var orderdetail = await _orderDetailBusiness.GetOrderDetailById(id) as OrderDetail;
-            if (orderdetail != null)
+            var orderdetail = await _orderDetailBusiness.GetOrderDetailById(id);
+            var orderDetailModel = (orderdetail.Data as OrderDetail);
+            if (orderDetailModel != null)
             {
-                OrderDetail = orderdetail;
-                _orderDetailBusiness.DeleteOrderDetail(orderdetail.OrderDetailId);
+                OrderDetail = orderDetailModel;
+                await _orderDetailBusiness.DeleteOrderDetail(orderDetailModel.OrderDetailId);
             }
 
             return RedirectToPage("./Index");

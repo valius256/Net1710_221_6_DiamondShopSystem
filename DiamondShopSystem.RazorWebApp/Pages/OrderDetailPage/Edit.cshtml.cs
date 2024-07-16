@@ -1,4 +1,5 @@
-﻿using DiamondShopSystem.DataAccess.Models;
+﻿using DiamondShopSystem.Business.Business.Interfaces;
+using DiamondShopSystem.DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -8,11 +9,14 @@ namespace DiamondShopSystem.RazorWebApp.Pages.OrderDetailPage
 {
     public class EditModel : PageModel
     {
-        private readonly Net1710_221_6_DiamondShopSystemContext _context;
-
-        public EditModel(Net1710_221_6_DiamondShopSystemContext context)
+        private readonly IOrderDetailBusiness _orderDetailBusiness;
+        private readonly IOrderBusiness _orderBusiness;
+        private readonly IProductBusiness _productBusiness;
+        public EditModel(IOrderDetailBusiness orderDetailBusiness, IOrderBusiness orderBusiness, IProductBusiness productBusiness)
         {
-            _context = context;
+            _orderDetailBusiness = orderDetailBusiness;
+            _orderBusiness = orderBusiness;
+            _productBusiness = productBusiness;
         }
 
         [BindProperty]
@@ -25,14 +29,19 @@ namespace DiamondShopSystem.RazorWebApp.Pages.OrderDetailPage
                 return NotFound();
             }
 
-            var orderdetail = await _context.OrderDetails.FirstOrDefaultAsync(m => m.OrderDetailId == id);
-            if (orderdetail == null)
+            var orderdetail = await _orderDetailBusiness.GetOrderDetailById(id);
+            var orderDetailModel = orderdetail.Data as OrderDetail;
+            if (orderDetailModel == null)
             {
                 return NotFound();
             }
-            OrderDetail = orderdetail;
-            ViewData["OrderId"] = new SelectList(_context.Set<Order>(), "OrderId", "OrderId");
-            ViewData["ProductId"] = new SelectList(_context.Set<Product>(), "ProductId", "ProductId");
+            OrderDetail = orderDetailModel;
+            var orderList = (await _orderBusiness.GetAllOrder()).Data as List<Order>;
+            var productList = (await _productBusiness.GetAllProducts()).Data as List<Product>;
+
+
+            ViewData["OrderId"] = new SelectList(orderList, "OrderId", "OrderId");
+            ViewData["ProductId"] = new SelectList(productList, "ProductId", "ProductId");
             return Page();
         }
 
@@ -40,20 +49,14 @@ namespace DiamondShopSystem.RazorWebApp.Pages.OrderDetailPage
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            _context.Attach(OrderDetail).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _orderDetailBusiness.UpdateOrderDetail(OrderDetail);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!OrderDetailExists(OrderDetail.OrderDetailId))
+                if (!await OrderDetailExists(OrderDetail.OrderDetailId))
                 {
                     return NotFound();
                 }
@@ -66,9 +69,10 @@ namespace DiamondShopSystem.RazorWebApp.Pages.OrderDetailPage
             return RedirectToPage("./Index");
         }
 
-        private bool OrderDetailExists(int id)
+        private async Task<bool> OrderDetailExists(int id)
         {
-            return _context.OrderDetails.Any(e => e.OrderDetailId == id);
+            var order = await _orderDetailBusiness.GetOrderDetailById(id);
+            return order.Data != null;
         }
     }
 }
