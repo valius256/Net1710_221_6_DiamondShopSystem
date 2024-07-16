@@ -1,8 +1,10 @@
 ﻿using DiamondShopSystem.Business.Business.Interfaces;
 using DiamondShopSystem.Business.Dtos;
+using DiamondShopSystem.Common.Dtos;
 using DiamondShopSystem.DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
 
 namespace DiamondShopSystem.RazorWebApp.Pages.OrderPage
 {
@@ -15,21 +17,79 @@ namespace DiamondShopSystem.RazorWebApp.Pages.OrderPage
             _orderBusiness = orderBusiness;
         }
 
+        public int PageNumber { get; set; }
+        public int TotalPage { get; set; }
+        public IList<Order> Orders { get; set; } = new List<Order>();
 
         [BindProperty(SupportsGet = true)]
-        public QueryOrderDto QueryOrderDto { get; set; } = default!;
+        public QueryOrderDto QueryOrderDto { get; set; } = new QueryOrderDto();
 
-        public IList<Order> Order { get; set; } = new List<Order>();//default!;
-
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(PageRequest pageRequest)
         {
-            Order = (await _orderBusiness.GetQueriedOrder(QueryOrderDto)).Data as List<Order> ?? new List<Order>();
+            var queryOrderDto = JsonConvert.DeserializeObject<QueryOrderDto>(pageRequest.queryString) ?? new QueryOrderDto();
+            var dataResult = await _orderBusiness.GetQueriedOrder(pageRequest.pageNumber, pageRequest.pageSize, queryOrderDto);
+            var result = dataResult.Data as PaginatedResult<Order>;
+
+            TempData["PageNumber"] = PageNumber = pageRequest.pageNumber;
+            TempData["PageSize"] = pageRequest.pageSize;
+            TempData["TotalPage"] = TotalPage = result?.TotalPages ?? 1;
+            TempData["QueryString"] = pageRequest.queryString;
+            QueryOrderDto = queryOrderDto;
+
+            Orders = result?.Results ?? new List<Order>();
         }
 
-        public void OnPost()
+        public IActionResult OnPostFilter()
         {
-            RedirectToAction("Index", QueryOrderDto);
+            int pageNumber = (int)(TempData["PageNumber"] ?? 1);
+            int pageSize = (int)(TempData["PageSize"] ?? 1);
+            int totalPage = (int)(TempData["TotalPage"] ?? 1);
+            string queryJson = JsonConvert.SerializeObject(QueryOrderDto);
+            return RedirectToPage("Index", new PageRequest()
+            {
+                pageNumber = pageNumber,
+                pageSize = pageSize,
+                totalPage = totalPage,
+                queryString = queryJson
+            });
         }
 
+        public IActionResult OnPostPrevPage()
+        {
+            int pageNumber = (int)(TempData["PageNumber"] ?? 1);
+            if (pageNumber > 1)
+            {
+                pageNumber--;
+            }
+            int pageSize = (int)(TempData["PageSize"] ?? 1);
+            int totalPage = (int)(TempData["TotalPage"] ?? 1);
+            string queryJson = (string)(TempData["QueryString"] ?? string.Empty);
+            return RedirectToPage("Index", new PageRequest()
+            {
+                pageNumber = pageNumber,
+                pageSize = pageSize,
+                totalPage = totalPage,
+                queryString = queryJson
+            });
+        }
+
+        public IActionResult OnPostNextPage()
+        {
+            int pageNumber = (int)(TempData["PageNumber"] ?? 1);
+            int totalPage = (int)(TempData["TotalPage"] ?? 1);
+            if (pageNumber < totalPage)
+            {
+                pageNumber++;
+            }
+            int pageSize = (int)(TempData["PageSize"] ?? 1);
+            string queryJson = (string)(TempData["QueryString"] ?? string.Empty);
+            return RedirectToPage("Index", new PageRequest()
+            {
+                pageNumber = pageNumber,
+                pageSize = pageSize,
+                totalPage = totalPage,
+                queryString = queryJson
+            });
+        }
     }
 }

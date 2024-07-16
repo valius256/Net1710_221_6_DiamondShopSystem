@@ -22,11 +22,11 @@
         </div>
         <div class="form-group">
             <label class="control-label">Order Date From</label>
-            <input name="QueryOrderDto.OrderDate.From" class="form-control" type="date" />
+            <input asp-for="QueryOrderDto.OrderDateFrom" class="form-control" type="date" />
         </div>
         <div class="form-group">
             <label class="control-label">Order Date To</label>
-            <input name="QueryOrderDto.OrderDate.To" class="form-control" type="date" />
+            <input asp-for="QueryOrderDto.OrderDateTo" class="form-control" type="date" />
         </div>
         <div class="form-group">
             <label asp-for="QueryOrderDto.OrderStatus" class="control-label">Order Status</label>
@@ -49,73 +49,33 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Order[0].OrderId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order[0].CustomerId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order[0].OrderDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order[0].OrderStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order[0].DeliveryStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order[0].TotalAmount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order[0].CreateAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order[0].UpdateAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order[0].Note)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order[0].TotalPrice)
-            </th>
+            <th>@Html.DisplayNameFor(model => model.Orders[0].OrderId)</th>
+            <th>@Html.DisplayNameFor(model => model.Orders[0].CustomerId)</th>
+            <th>@Html.DisplayNameFor(model => model.Orders[0].OrderDate)</th>
+            <th>@Html.DisplayNameFor(model => model.Orders[0].OrderStatus)</th>
+            <th>@Html.DisplayNameFor(model => model.Orders[0].DeliveryStatus)</th>
+            <th>@Html.DisplayNameFor(model => model.Orders[0].TotalAmount)</th>
+            <th>@Html.DisplayNameFor(model => model.Orders[0].CreateAt)</th>
+            <th>@Html.DisplayNameFor(model => model.Orders[0].UpdateAt)</th>
+            <th>@Html.DisplayNameFor(model => model.Orders[0].Note)</th>
+            <th>@Html.DisplayNameFor(model => model.Orders[0].TotalPrice)</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Order)
+        @foreach (var item in Model.Orders)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OrderId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CustomerId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OrderDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OrderStatus)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DeliveryStatus)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalAmount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreateAt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UpdateAt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Note)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalPrice)
-                </td>
+                <td>@Html.DisplayFor(modelItem => item.OrderId)</td>
+                <td>@Html.DisplayFor(modelItem => item.CustomerId)</td>
+                <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.OrderStatus)</td>
+                <td>@Html.DisplayFor(modelItem => item.DeliveryStatus)</td>
+                <td>@Html.DisplayFor(modelItem => item.TotalAmount)</td>
+                <td>@Html.DisplayFor(modelItem => item.CreateAt)</td>
+                <td>@Html.DisplayFor(modelItem => item.UpdateAt)</td>
+                <td>@Html.DisplayFor(modelItem => item.Note)</td>
+                <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
                 <td>
                     <a asp-page="./Edit" asp-route-id="@item.OrderId">Edit</a> |
                     <a asp-page="./Details" asp-route-id="@item.OrderId">Details</a> |
@@ -125,3 +85,25 @@
         }
     </tbody>
 </table>
+
+<div class="container mt-5">
+    <div class="d-flex flex-wrap justify-content-center gap-2">
+        <div class="form-group">
+            <form method="post" asp-page-handler="PrevPage">
+                <button type="submit" class="btn btn-primary">Previous Page</button>
+            </form>
+        </div>
+        <div class="form-group ">
+            @* <input asp-for="PageNumber" class="form-control"/> *@
+            @Model.PageNumber
+        </div>
+        <div>
+            / @Model.TotalPage
+        </div>
+        <div class="form-group">
+            <form method="post" asp-page-handler="NextPage">
+                <button type="submit" class="btn btn-primary">Next Page</button>
+            </form>
+        </div>
+    </div>
+</div>

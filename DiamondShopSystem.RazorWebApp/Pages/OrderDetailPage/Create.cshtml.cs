@@ -10,21 +10,26 @@ namespace DiamondShopSystem.RazorWebApp.Pages.OrderDetailPage
     {
         private readonly IOrderDetailBusiness _orderDetailBusiness;
         private readonly IProductBusiness _productBusiness;
-        public CreateModel(IOrderDetailBusiness orderDetail, IProductBusiness productBusiness)
+        private readonly IOrderBusiness _orderBusiness;
+
+        public CreateModel(IOrderDetailBusiness orderDetail, IProductBusiness productBusiness, IOrderBusiness orderBusiness)
         {
             _orderDetailBusiness = orderDetail;
             _productBusiness = productBusiness;
+            _orderBusiness = orderBusiness;
         }
 
 
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var orderList = (await _orderDetailBusiness.GetAllOrderDetail()).Data as List<OrderDetail>;
-            var productList = (await _orderDetailBusiness.GetAllOrderDetail()).Data as List<Product>;
+            var orderList = (await _orderBusiness.GetAllOrder());
+            var productList = (await _productBusiness.GetAllProducts());
 
-            ViewData["OrderId"] = new SelectList(orderList, "OrderId", "OrderId");
-            ViewData["ProductId"] = new SelectList(productList, "ProductId", "ProductId");
+            var orderListModel = (orderList.Data as List<Order>);
+            var productListModel = productList.Data as List<Product>;
+            ViewData["OrderId"] = new SelectList(orderListModel, "OrderId", "OrderId");
+            ViewData["ProductId"] = new SelectList(productListModel, "ProductId", "ProductId");
             return Page();
         }
 
@@ -33,10 +38,6 @@ namespace DiamondShopSystem.RazorWebApp.Pages.OrderDetailPage
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
 
             await _orderDetailBusiness.CreateOrderDetail(OrderDetail);
             return RedirectToPage("./Index");

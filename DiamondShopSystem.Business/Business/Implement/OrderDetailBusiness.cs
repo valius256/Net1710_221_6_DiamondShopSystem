@@ -1,8 +1,9 @@
 ﻿using DiamondShopSystem.Business.Business.Interfaces;
+using DiamondShopSystem.Business.Dtos;
 using DiamondShopSystem.Business.ViewModels;
 using DiamondShopSystem.Common;
-using DiamondShopSystem.DataAccess.Models;
 using DiamondShopSystem.DataAccess;
+using DiamondShopSystem.DataAccess.Models;
 
 namespace DiamondShopSystem.Business.Business.Implement
 {
@@ -35,7 +36,7 @@ namespace DiamondShopSystem.Business.Business.Implement
                 return new BusinessResult(-4, e.Message.ToString());
             }
         }
-        
+
         public async Task<IBusinessResult> GetOrderDetailById(int? id)
         {
             try
@@ -123,6 +124,26 @@ namespace DiamondShopSystem.Business.Business.Implement
             catch (Exception ex)
             {
                 return new BusinessResult(-4, ex.ToString());
+            }
+        }
+
+        public async Task<IBusinessResult> GetAllOrderDetailQuery(int pageNumber, int pageSize, QueryOrderDetailDto queryOrderDetailDto)
+        {
+            try
+            {
+                var orders = await _unitOfWork.OrderDetailRepository.GetQueriedOrderDetails(pageNumber, pageSize, queryOrderDetailDto);
+                if (orders == null)
+                {
+                    return new BusinessResult(Const.WARNING_NO_DATA_CODE, Const.FAIL_READ_MSG);
+                }
+                else
+                {
+                    return new BusinessResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, orders);
+                }
+            }
+            catch (Exception e)
+            {
+                return new BusinessResult(-4, e.Message.ToString());
             }
         }
     }

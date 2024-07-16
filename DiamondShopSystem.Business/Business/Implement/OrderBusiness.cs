@@ -147,19 +147,6 @@ namespace DiamondShopSystem.Business.Business.Implement
             }
         }
 
-        public async Task<IBusinessResult> GetQueriedOrder(QueryOrderDto queryOrderDto)
-        {
-            var orders = await _unitOfWork.OrderRepository.GetQueriedOrder(queryOrderDto);
-            if (orders is null)
-            {
-                return new BusinessResult(Const.WARNING_NO_DATA_CODE, Const.WARNING_NO_DATA__MSG);
-            }
-            else
-            {
-                return new BusinessResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, orders);
-            }
-        }
-
         public async Task<IBusinessResult> OrderExist(int id)
         {
             var ordersList = await _unitOfWork.OrderRepository.GetAllAsync();
@@ -171,6 +158,26 @@ namespace DiamondShopSystem.Business.Business.Implement
             else
             {
                 return new BusinessResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, order);
+            }
+        }
+
+        public async Task<IBusinessResult> GetQueriedOrder(int pageNumber, int pageSize, QueryOrderDto queryOrderDto)
+        {
+            try
+            {
+                var orders = await _unitOfWork.OrderRepository.GetQueriedOrder(pageNumber, pageSize, queryOrderDto);
+                if (orders == null)
+                {
+                    return new BusinessResult(Const.WARNING_NO_DATA_CODE, Const.FAIL_READ_MSG);
+                }
+                else
+                {
+                    return new BusinessResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, orders);
+                }
+            }
+            catch (Exception e)
+            {
+                return new BusinessResult(-4, e.Message.ToString());
             }
         }
     }

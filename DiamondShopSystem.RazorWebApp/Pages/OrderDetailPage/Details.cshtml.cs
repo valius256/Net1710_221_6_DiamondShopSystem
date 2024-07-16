@@ -23,14 +23,15 @@ namespace DiamondShopSystem.RazorWebApp.Pages.OrderDetailPage
                 return NotFound();
             }
 
-            var orderdetail = await _orderDetailBusiness.GetOrderDetailById(id) as OrderDetail;
-            if (orderdetail == null)
+            var orderdetail = await _orderDetailBusiness.GetOrderDetailById(id);
+            var orderdetailModel = (orderdetail.Data as OrderDetail);
+            if (orderdetailModel == null)
             {
                 return NotFound();
             }
             else
             {
-                OrderDetail = orderdetail;
+                OrderDetail = orderdetailModel;
             }
             return Page();
         }
