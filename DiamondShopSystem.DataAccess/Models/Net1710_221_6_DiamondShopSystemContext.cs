@@ -14,6 +14,7 @@ public partial class Net1710_221_6_DiamondShopSystemContext : DbContext
     public Net1710_221_6_DiamondShopSystemContext(DbContextOptions<Net1710_221_6_DiamondShopSystemContext> options)
         : base(options)
     {
+
     }
 
     public virtual DbSet<Customer> Customers { get; set; }
